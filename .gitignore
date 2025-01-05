@@ -1,3 +1,5 @@
 venv
 manage.py
 alpha_tempaltes
+**__pycache__
+db.sqlite3
