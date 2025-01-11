@@ -1,0 +1,32 @@
+{% load static %}
+<div class="col align-items-center item" data-item-id="1">
+
+    <div class="item_border_out p-1">
+
+      <div class="item_border_in p-2">
+
+        <div class="row position-relative base_container_item">
+
+            <img src="/alpha_tempaltes/img/goods/hard_seltzer.png" class="item_img" alt="">
+            <img src={% static "goods/img/hard_seltzer.png" %} class="item_img" alt="">
+            <span
+            class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger opacity w-25 fs-6">-50%</span>
+          
+            <div class="col-8 ps-4 flex-column">
+                <div class="item_name fs-2">
+                    Hard seltzer
+                </div>
+                <div class="item_characteristic text-body-tertiary fs_n_thin_italic">
+                    Мандарин и Персик
+                </div>
+            </div>
+
+            <div class="col-4 d-flex align-items-center justify-content-center flex-column">
+                <div class="item_last_price text-decoration-line-through p-0 pt-2 fs_n_thin">250₽</div>
+                <div class="item_price fs_n_black fs-4 p-0">125₽</div>
+            </div>                
+
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,55 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container">
+
+    <div class="row mt-3">
+<!-- ФИЛЬТРЫ  -->
+      <div class="d-none d-lg-block col-lg-3">
+        <div class="filter_block p-2">
+          <p class="filter_block_name fs-5 fs_n_thin_italic">Фильтры</p>
+        </div>
+      </div>
+
+      <div class="d-flex d-lg-none align-items-center w-100 my-3">
+        <button class="btn btn-primary w-100 fs_n_thin_italic" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+          aria-expanded="false" aria-controls="collapseExample">ФИЛЬТРЫ</button>
+      </div>
+
+      <div class="collapse mb-3" id="collapseExample">
+        <div class="filter_block p-2">
+          <p class="filter_block_name fs-4 fs_n_thin_italic">Фильтры SM</p>
+        </div>
+      </div>
+<!-- КОНЕЦ ФИЛЬТРЫ  -->
+
+
+      <div class="col-lg-9">
+
+        <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 g-3">
+
+            {% include "goods/include_item.html" %}
+            {% include "goods/include_item.html" %}
+            {% include "goods/include_item.html" %}
+            {% include "goods/include_item.html" %}
+            {% include "goods/include_item.html" %}
+            {% include "goods/include_item.html" %}
+            
+          
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+  <script src="{% static "goods/js/on_click_add_menu.js" %}"></script>
+{% endblock scripts %}

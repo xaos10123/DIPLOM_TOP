@@ -10,6 +10,18 @@
         
     <div class="container">
         <div class="row row-cols-6 pt-4">
+
+          {% for category in categories  %}
+            <a href='#' class="col p-0">
+              <div class="icon_menu">
+                <div class="icon_menu_wrapper">
+                  <img src={% static category.image %} alt="" class=" ">
+                  <p class="fs-5 fs_n_light_italic d-none d-md-block">{{ category.name }}</p>
+                </div>
+              </div>
+            </a>
+          {% endfor %}
+
           <div class="col p-0">
             <div class="icon_menu">
               <div class="icon_menu_wrapper">
@@ -18,6 +30,7 @@
               </div>
             </div>
           </div>
+
           <div class="col p-0">
             <div class="icon_menu">
               <div class="icon_menu_wrapper">

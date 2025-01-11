@@ -76,8 +76,6 @@ function addToBasketFromMenu(evt, id) {
     countElement.setAttribute('data-count', 1);
     countElement.querySelector('.item_value').textContent = 1;
 
-    animatedGoToBasket(countElement, evt)
-
     console.log({ "id": id, "count": count });
 
     return { "id": id, "count": count };
