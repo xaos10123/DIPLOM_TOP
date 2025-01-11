@@ -5,3 +5,8 @@ alpha_tempaltes
 db.sqlite3
 .vscode
 .pylintrc
+*.png
+*.ttf
+*.otf
+*.scss
+*.map

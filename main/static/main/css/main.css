@@ -1,0 +1,153 @@
+@property --a {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+body {
+  background-size: 15vw;
+  height: 100vh;
+  font-family: "AmaBold";
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+body .header {
+  background-color: #FFFFFF;
+}
+body .header_logo img {
+  max-height: 70px;
+}
+body .header_name_market {
+  margin: 0 0 0 0.5rem;
+  color: #FFFFFF;
+  padding: 0.1rem 0.5rem;
+  background-color: #298BED;
+  border-radius: 10%;
+}
+body .header_menu {
+  margin: 0 0.5rem;
+  background-color: #FFFFFF;
+}
+body .header_menu .col,
+body .header_menu a {
+  transition: all 0.5s ease-in-out;
+  border-radius: 10%;
+}
+body .header_menu .col:hover,
+body .header_menu a:hover {
+  background-color: #f5b727;
+  border-radius: 10%;
+  cursor: pointer;
+}
+body .header_login {
+  text-decoration: none !important;
+  background-color: #298BED;
+  color: #FFFFFF;
+  border-radius: 10%;
+  transition: all 0.5s ease-in-out;
+}
+body .header_login:hover {
+  color: #000000;
+  background-color: #f5b727;
+}
+
+.item {
+  cursor: pointer;
+}
+.item .item_border_out {
+  transition: all 0.5s ease-in-out;
+  border-radius: 10%;
+  height: 100%;
+}
+.item .item_border_in {
+  background-color: #FFFFFF;
+  border-radius: 10%;
+  transition: all 0.5s ease-in-out;
+  height: inherit;
+}
+.item_img {
+  width: 100%;
+  border-radius: 15%;
+}
+.item_characteristic {
+  font-size: small;
+}
+.item_last_price {
+  line-height: 0;
+  color: #FF4880;
+}
+.item_price {
+  color: #298BED;
+}
+.item_add_to_card {
+  display: none;
+  transition: all 0.5s ease-in-out;
+  position: absolute;
+  top: -15px;
+  font-family: "NerisSemiBold";
+  position: absolute;
+  top: -15px;
+  color: #FFFFFF;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10%;
+  height: 110%;
+}
+.item:hover .item_border_in {
+  background-color: #f1f1f1;
+}
+.item:hover .item_border_out {
+  background: repeating-conic-gradient(from var(--a), #f5b727 0%, #f5b727 5%, transparent 5%, transparent 40%, #f5b727 50%);
+  animation: rotate 10s linear infinite;
+}
+
+.filter_block {
+  background-color: rgba(41, 139, 237, 0.2);
+  min-height: 20vh;
+  position: sticky;
+  top: 2rem;
+  border-radius: 10%;
+}
+.filter_block_name {
+  text-align: center;
+  border-bottom: 1px solid #298BED;
+}
+
+.baket_item_img {
+  width: 100%;
+  border-radius: 10%;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.footer {
+  border-top: #0A519B 10px solid;
+  text-align: center;
+}
+.footer p:not(:last-child) {
+  margin: 0;
+  border-radius: 0 0 10px 10px;
+  background-color: #298BED;
+  color: #FFFFFF;
+}
+.footer p:last-child {
+  margin-top: 0.5rem;
+}
+.footer_col a {
+  margin-top: 5px;
+  border-radius: 20px;
+}
+.footer_col a:hover {
+  color: #FFFFFF;
+  background-color: rgba(41, 139, 237, 0.7);
+}
+
+@keyframes rotate {
+  0% {
+    --a: 0deg;
+  }
+  100% {
+    --a: 360deg;
+  }
+}/*# sourceMappingURL=main.css.map */

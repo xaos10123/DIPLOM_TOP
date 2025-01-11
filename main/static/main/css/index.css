@@ -1,0 +1,209 @@
+@charset "UTF-8";
+.icon_menu {
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  border-radius: 10%;
+  overflow: hidden;
+  padding: 6px;
+}
+.icon_menu img {
+  max-width: 50px;
+}
+.icon_menu_wrapper {
+  overflow: hidden;
+  width: auto;
+  padding: 15px 25px;
+  border: 2px solid rgb(231, 231, 231);
+  border-radius: 10%;
+  background-color: #FFFFFF;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.icon_menu_wrapper p {
+  margin: 0;
+  text-align: center;
+}
+.icon_menu_wrapper::after {
+  content: " ";
+  position: absolute;
+  top: -90%;
+  left: -10%;
+  width: 10px;
+  height: 220px;
+  transform: rotate(45deg);
+  background-color: #FFFFFF;
+  transition: all 0.5s ease-in-out;
+  border: rgba(255, 255, 255, 0.5) 3px solid;
+}
+.icon_menu_wrapper:hover {
+  border: 2px solid #0A519B;
+  background-color: rgba(10, 81, 155, 0.1);
+  transform: rotateZ(5deg);
+}
+.icon_menu_wrapper:hover::after {
+  content: " ";
+  position: absolute;
+  top: 25%;
+  left: 95%;
+  height: 200px;
+  transform: rotate(45deg);
+  background-color: #FFFFFF;
+}
+
+.footer {
+  border-top: #0A519B 10px solid;
+  text-align: center;
+}
+.footer p:not(:last-child) {
+  margin: 0;
+  border-radius: 0 0 10px 10px;
+  background-color: #298BED;
+  color: #FFFFFF;
+}
+.footer p:last-child {
+  margin-top: 0.5rem;
+}
+.footer_col a {
+  margin-top: 5px;
+  border-radius: 20px;
+}
+.footer_col a:hover {
+  color: #FFFFFF;
+  background-color: rgba(41, 139, 237, 0.7);
+}
+
+.discount_block {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  position: relative;
+}
+.discount_block_item {
+  width: 200px;
+  position: relative;
+  border-radius: 10%;
+  border: 5px solid #FFFFFF;
+  transition: all 0.5s ease-in-out;
+  justify-content: space-between;
+}
+.discount_block_item img {
+  width: 90%;
+  border-radius: 10%;
+}
+.discount_block_item_text {
+  color: #FFFFFF;
+  text-align: center;
+  padding: 5px 10px 10px 10px;
+  margin: 0;
+  width: inherit;
+}
+.discount_block_item_goods {
+  color: #000000;
+  padding: 5px 10px 10px 10px;
+  margin: 0;
+  width: inherit;
+  padding: 0;
+}
+.discount_block_item_goods_name {
+  margin-top: 10px !important;
+}
+.discount_block_item_goods_name_char {
+  color: #0A519B;
+  font-size: 0.8rem;
+}
+.discount_block_item_goods_price {
+  display: flex;
+  padding: 5px 10px 10px 10px;
+  color: rgb(221, 52, 69);
+}
+.discount_block_item_goods_price_old {
+  margin-right: 5%;
+  color: rgba(0, 0, 0, 0.3);
+  text-decoration: line-through;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+.discount_block::-webkit-scrollbar {
+  display: none;
+}
+.discount_block::after {
+  content: "ㅤ";
+  white-space: nowrap;
+  position: sticky;
+  height: inherit;
+  min-width: 100px;
+  right: -1%;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 0.9) 50%, rgb(255, 255, 255) 100%);
+}
+.discount_block .finger {
+  position: absolute;
+  font-size: 30px;
+  bottom: -2%;
+  color: #000000;
+  left: 5%;
+  animation: finger_anim 2s linear 5;
+  opacity: 0;
+}
+
+.good_item {
+  background-color: #FFFFFF;
+  transition: all 0.5s ease-in-out;
+}
+.good_item:hover {
+  background-color: rgb(231, 231, 231);
+}
+
+.crown {
+  position: absolute;
+  top: -11px;
+  right: -8%;
+  font-size: 2rem;
+  z-index: 20;
+  transform: rotateZ(45deg);
+  color: #b17f0c;
+}
+
+@media screen and (max-width: 767px) {
+  .icon_menu_wrapper {
+    padding: 0;
+    border: none;
+  }
+  .discount_block::after {
+    min-width: 50px;
+  }
+  .icon_menu_wrapper::after {
+    display: none;
+  }
+  .icon_menu_wrapper:hover {
+    background: none;
+    border: none;
+  }
+  .footer {
+    border-top: none;
+  }
+  .footer p:not(:last-child) {
+    margin-top: 10px;
+    border-radius: 10px;
+    background-color: #298BED;
+    color: #FFFFFF;
+  }
+}
+@keyframes finger_anim {
+  0% {
+    left: 10%;
+    opacity: 0;
+  }
+  50% {
+    left: 0%;
+    opacity: 1;
+  }
+  100% {
+    left: 10%;
+    opacity: 0;
+  }
+}/*# sourceMappingURL=index.css.map */
