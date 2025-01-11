@@ -3,7 +3,7 @@
       <div class="row py-1">
         <div class="col col-md-4 header_logo">
           <div class="row px-2 px-sm-0">
-            <div class="d-none d-md-block col d-block"><img src={% static "main/img/logo_bear.svg" %}
+            <div class="d-none d-md-block col d-flex align-items-center my-auto"><img src={% static "main/img/logo_bear.svg" %}
                 class="rounded mx-auto d-block" alt=""></div>
             <div class="col-9 header_name d-flex align-items-center fs-1 p-0  text-nowrap">ICE BEAR <p
                 class="header_name_market">MARKET
@@ -17,6 +17,7 @@
             <a href="" class="col">Акции</a>
             <a href="" class="col">Доставка</a>
           </div>
+
           <button class="btn btn-primary position-relative me-2" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasBasket" aria-controls="offcanvasBasket"><i class="fa-solid fa-cart-shopping"></i>
             <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger fs_n_thin">
@@ -47,3 +48,4 @@
 
 
 {% include "main/include_basket.html" %}
+{% include "main/include_menu_small.html" %}
