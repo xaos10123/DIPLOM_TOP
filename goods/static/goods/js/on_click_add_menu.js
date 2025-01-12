@@ -34,10 +34,22 @@ items.forEach((element) => {
 });
 
 document.addEventListener('click', () => {
+    if (items_open.length == 0) {
+        return
+    }
     closeAllMenuAddToBasket();
 });
 
+document.onscroll = () => {
+    if (items_open.length == 0) {
+        return
+    }
+    closeAllMenuAddToBasket();
+}
+
 function closeAllMenuAddToBasket() {
+    console.log('closeAllMenuAddToBasket');
+    
     items_open.forEach((item, index) => {
         const menu = item.querySelector('.item_add_to_card');
         menu.style.display = 'none';
@@ -86,7 +98,7 @@ function createTemplate(id, name, characteristic) {
         <div class="item_add_to_card" data-count="1">
                     <div
                       class="container d-flex flex-column align-items-center justify-content-center text-center h-100">
-                      <div class="item_name fs-2">${name}</div>
+                      <div class="item_name fs-5">${name}</div>
                       <div class="item_characteristic fs_n_thin_italic text-white">${characteristic}
                       </div>
                       <div class="row">
