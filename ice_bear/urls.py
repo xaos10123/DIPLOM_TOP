@@ -18,8 +18,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from ice_bear import settings  
 from django.conf.urls.static import static
+from ice_bear import settings
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),

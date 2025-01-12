@@ -1,4 +1,6 @@
 from email.mime import image
+from email.policy import default
+from math import floor
 from django.conf.locale import sl
 from django.db import models
 
@@ -13,3 +15,24 @@ class Categories(models.Model):
 
     def __str__(self):
             return self.name
+    
+
+class Product(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Название')
+    char = models.CharField(max_length=100, verbose_name='Характеристика')
+    slug = models.SlugField(max_length=150, unique=True, blank=True, null=True, verbose_name='URL')
+    image = models.ImageField(upload_to='products', blank=True, null=True, verbose_name='Изображение')
+    price = models.IntegerField(verbose_name='Цена')
+    discaunt = models.IntegerField(default=0, verbose_name='Скидка')
+    category = models.ForeignKey(Categories, on_delete=models.PROTECT, verbose_name='Категория')
+    quantity = models.PositiveIntegerField(default=0, verbose_name='Количество')
+
+    class Meta:
+        verbose_name = 'Товар'
+        verbose_name_plural = 'Товары'
+        unique_together = ['name', 'char']
+        ordering = ['name', 'char']
+        default_related_name = 'products'
+
+    def __str__(self):
+        return self.name

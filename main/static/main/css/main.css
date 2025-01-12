@@ -57,26 +57,31 @@ body .header_login:hover {
   transition: all 0.5s ease-in-out;
   border-radius: 10%;
   height: 100%;
+  overflow-x: hidden;
 }
 .item .item_border_in {
   background-color: #FFFFFF;
   border-radius: 10%;
   transition: all 0.5s ease-in-out;
   height: inherit;
+  overflow: hidden;
+}
+.item .item_badge {
+  bottom: 20px;
+  right: 10px;
 }
 .item_img {
   width: 100%;
   border-radius: 15%;
+  z-index: 2;
 }
 .item_characteristic {
   font-size: small;
 }
-.item_last_price {
-  line-height: 0;
-  color: #FF4880;
-}
 .item_price {
   color: #298BED;
+  width: 100%;
+  text-align: center;
 }
 .item_add_to_card {
   display: none;
@@ -84,19 +89,47 @@ body .header_login:hover {
   position: absolute;
   top: -15px;
   font-family: "NerisSemiBold";
-  position: absolute;
-  top: -15px;
   color: #FFFFFF;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   border-radius: 10%;
-  height: 110%;
+  height: 109%;
+  z-index: 1000;
 }
-.item:hover .item_border_in {
-  background-color: #f1f1f1;
+.item .label_category {
+  position: absolute;
+  background: linear-gradient(90deg, rgb(245, 183, 39) 0%, rgb(255, 224, 152) 100%);
+  width: auto;
+  top: 55%;
+  left: 4px;
+  z-index: 500;
+  border-radius: 0 10px 10px 10px;
+  box-shadow: 6px 3px 2px -1px rgba(0, 0, 0, 0.4);
+}
+.item .label_category::before {
+  content: " ";
+  position: absolute;
+  top: -13px;
+  left: 0;
+  width: 8px;
+  height: calc(100% + 10px);
+  background: linear-gradient(90deg, rgb(209, 156, 33) 0%, rgb(245, 183, 39) 100%);
+  z-index: 10;
+  border-radius: 10px 0 0 10px;
+}
+.item .label_category::after {
+  content: " ";
+  position: absolute;
+  top: -17px;
+  left: 0;
+  width: 8px;
+  height: 70%;
+  background: linear-gradient(90deg, rgb(109, 77, 7) 0%, rgb(141, 101, 7) 100%);
+  z-index: 100;
+  border-radius: 10px 0 0 10px;
 }
 .item:hover .item_border_out {
   background: repeating-conic-gradient(from var(--a), #f5b727 0%, #f5b727 5%, transparent 5%, transparent 40%, #f5b727 50%);
-  animation: rotate 10s linear infinite;
+  animation: rotate 7s linear infinite;
 }
 
 .filter_block {

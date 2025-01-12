@@ -30,14 +30,9 @@
       <div class="col-lg-9">
 
         <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 g-3">
-
+            {% for item in goods %}
             {% include "goods/include_item.html" %}
-            {% include "goods/include_item.html" %}
-            {% include "goods/include_item.html" %}
-            {% include "goods/include_item.html" %}
-            {% include "goods/include_item.html" %}
-            {% include "goods/include_item.html" %}
-            
+            {% endfor %}
           
         </div>
 

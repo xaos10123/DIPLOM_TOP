@@ -1,30 +1,44 @@
 {% load static %}
 <div class="col align-items-center item" data-item-id="1">
 
-    <div class="item_border_out p-1">
+    <div class="item_border_out p-1 border-bottom border-2">
 
-      <div class="item_border_in p-2">
+      <div class="item_border_in border-top border-1 p-2">
 
         <div class="row position-relative base_container_item">
+            <div class="position-absolute label_category fs_n_thin_italic">{{ item.category }}</div>
 
-            <img src="/alpha_tempaltes/img/goods/hard_seltzer.png" class="item_img" alt="">
-            <img src={% static "goods/img/hard_seltzer.png" %} class="item_img" alt="">
-            <span
-            class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger opacity w-25 fs-6">-50%</span>
-          
-            <div class="col-8 ps-4 flex-column">
-                <div class="item_name fs-2">
-                    Hard seltzer
-                </div>
-                <div class="item_characteristic text-body-tertiary fs_n_thin_italic">
-                    Мандарин и Персик
-                </div>
-            </div>
+            {% if item.image %}
+                <img src="{{ item.image.url }}" class="item_img" alt="{{item.name}}_{{item.char}}">
+            {% else  %}
+                <img src={% static "main/img/no_img.png" %} class="item_img" alt="no_ing">
+            {% endif %}
 
-            <div class="col-4 d-flex align-items-center justify-content-center flex-column">
-                <div class="item_last_price text-decoration-line-through p-0 pt-2 fs_n_thin">250₽</div>
-                <div class="item_price fs_n_black fs-4 p-0">125₽</div>
-            </div>                
+            {% if item.discaunt != 0 %}
+                <span
+                class="position-absolute translate-middle badge rounded-pill bg-danger opacity w-25 fs-6 item_badge" style="z-index: 30;">-{{ item.discaunt }}%</span>
+            {% endif %}
+            
+                <div class="col ps-4 flex-column">
+                    <div class="item_name fs-4">
+                        {{ item.name }}
+                    </div>
+                    <div class="item_characteristic text-body-tertiary fs_n_thin_italic" style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                        {{ item.char }}
+                    </div>
+                </div>
+
+                <div class="row ps-4 pt-2">
+                    <div class="col d-flex align-items-center justify-content-start">
+                        <div class="float-start fs-5 me-3">Цена:</div>
+
+                        
+
+                        <div class="item_price fs_n_black fs-4 p-0" style="{% if item.discaunt != 0 %}color:#dc3545;{% endif %}">{{ item.price }}₽</div>
+
+                    </div>
+                </div>
+                           
 
         </div>
       </div>

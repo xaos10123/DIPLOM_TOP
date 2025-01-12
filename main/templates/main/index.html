@@ -15,62 +15,13 @@
             <a href='#' class="col p-0">
               <div class="icon_menu">
                 <div class="icon_menu_wrapper">
-                  <img src={% static category.image %} alt="" class=" ">
+                  <img src="{{ category.image.url }}" alt="{{ category.name }}" class=" ">
                   <p class="fs-5 fs_n_light_italic d-none d-md-block">{{ category.name }}</p>
                 </div>
               </div>
             </a>
           {% endfor %}
-
-          <div class="col p-0">
-            <div class="icon_menu">
-              <div class="icon_menu_wrapper">
-                <img src={% static "main/img/icons/lemonade.png" %} alt="" class=" ">
-                <p class="fs-5 fs_n_light_italic d-none d-md-block">Лимонад</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="col p-0">
-            <div class="icon_menu">
-              <div class="icon_menu_wrapper">
-                <img src={% static "main/img/icons/energy.png" %} alt="" class="">
-                <p class="fs-5 fs_n_light_italic d-none d-md-block">Энергетик</p>
-              </div>
-            </div>
-          </div>
-          <div class="col p-0">
-            <div class="icon_menu">
-              <div class="icon_menu_wrapper">
-                <img src={% static "main/img/icons/mors.png" %} alt="" class="">
-                <p class="fs-5 fs_n_light_italic d-none d-md-block">Морс</p>
-              </div>
-            </div>
-          </div>
-          <div class="col p-0">
-            <div class="icon_menu">
-              <div class="icon_menu_wrapper">
-                <img src={% static "main/img/icons/juice.png" %} alt="" class="">
-                <p class="fs-5 fs_n_light_italic d-none d-md-block">Сок</p>
-              </div>
-            </div>
-          </div>
-          <div class="col p-0">
-            <div class="icon_menu">
-              <div class="icon_menu_wrapper">
-                <img src={% static "main/img/icons/mineral.png" %} alt="" class="">
-                <p class="fs-5 fs_n_light_italic d-none d-md-block">Мин.вода</p>
-              </div>
-            </div>
-          </div>
-          <div class="col p-0">
-            <div class="icon_menu">
-              <div class="icon_menu_wrapper">
-                <img src={% static "main/img/icons/smuzi.png" %} alt="" class="">
-                <p class="fs-5 fs_n_light_italic d-none d-md-block">Смузи</p>
-              </div>
-            </div>
-          </div>
+          
         </div>
     
     
