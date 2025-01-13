@@ -15,8 +15,8 @@
             {% endif %}
 
             {% if item.discaunt != 0 %}
-                <span
-                class="position-absolute translate-middle badge rounded-pill bg-danger opacity w-25 fs-6 item_badge" style="z-index: 30;">-{{ item.discaunt }}%</span>
+                <div
+                class="position-absolute label_sale "><p>{{ item.discaunt }}%</p></div>
             {% endif %}
             
                 <div class="col ps-4 flex-column">
