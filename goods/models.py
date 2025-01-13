@@ -26,6 +26,7 @@ class Product(models.Model):
     discaunt = models.IntegerField(default=0, verbose_name='Скидка')
     category = models.ForeignKey(Categories, on_delete=models.PROTECT, verbose_name='Категория')
     quantity = models.PositiveIntegerField(default=0, verbose_name='Количество')
+    order_amount = models.PositiveIntegerField(default=0, verbose_name='Количество заказов')
 
     class Meta:
         verbose_name = 'Товар'

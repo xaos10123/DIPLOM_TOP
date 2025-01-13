@@ -1,4 +1,4 @@
-{% extends "main/base.html" %}
+
 {% load static %}
 
     {% block header_link %}
@@ -8,11 +8,15 @@
 
     {% block content %}
         
-    <div class="container">
+
         <div class="row row-cols-6 pt-4">
 
           {% for category in categories  %}
-            <a href='#' class="col p-0">
+            <a href='#'
+              hx-get="{% url "goods:category" category.slug %}"
+              hx-target="#main_container"
+              hx-push-url="true"
+             class="col p-0">
               <div class="icon_menu">
                 <div class="icon_menu_wrapper">
                   <img src="{{ category.image.url }}" alt="{{ category.name }}" class=" ">
@@ -72,76 +76,31 @@
         </div>
     
         <p class="m-0 pt-2 fs-3">Лучшие из лучших</p>
-        <div class="pt-2 discount_block">
-    
-    
-          <div class="p-2 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center discount_block_item"
-            style="background-color:#d99f1bba;">
-            <img src={% static "main/img/discount/baner1.png" %} alt="" class="">
-            <i class="fa-solid fa-crown crown"></i>
-            <p class="fs-5 m-0 discount_block_item_text fs_n_black_italic">Посмотреть все товары...</p>
+
+
+        <div class="row position-relative">
+          <div class="scrollable">
+            <div class="pt-2 discount_block content">
+        
+              <div class="p-2 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center discount_block_item"
+                style="background-color:#d99f1bba;">
+                <img src={% static "main/img/discount/baner1.png" %} alt="" class="">
+                <i class="fa-solid fa-crown crown"></i>
+                <p class="fs-5 m-0 discount_block_item_text fs_n_black_italic">Посмотреть все товары...</p>
+              </div>            
+        
+              {% for item in items_bests %}
+                {% include "main/include_item_best.html" %}
+              {% endfor %}      
+        
+            </div>          
           </div>
-    
-          <div class="p-2 mx-3 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center border discount_block_item good_item">
-            <img src={% static "main/img/goods/lolipop.png" %} alt="" class="">
-    
-            <div class="discount_block_item_goods">
-              <p class="fs-6 px-3 m-0 discount_block_item_goods_name fs_n_light_italic">Lolipop</p>
-              <p class="m-0 mt-2 px-3 discount_block_item_goods_name_char fs_n_thin">Спелый лимон</p>
-              <div class="fs-6 px-3 discount_block_item_goods_price fs_n_black_italic"><p class="discount_block_item_goods_price_old fs_n_light">200 р</p>150 р</div>
-            </div>
-    
-          </div>
-    
-          <div class="p-2 mx-3 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center border discount_block_item good_item">
-            <img src={% static "main/img/no_img.png" %} alt="" class="pb-2">
-    
-            <div class="discount_block_item_goods">
-              <p class="fs-6 px-3 m-0 discount_block_item_goods_name fs_n_light_italic">Lolipop</p>
-              <p class="m-0 mt-2 px-3 discount_block_item_goods_name_char fs_n_thin">Спелый лимон</p>
-              <div class="fs-6 px-3 discount_block_item_goods_price fs_n_black_italic"><p class="discount_block_item_goods_price_old fs_n_light">200 р</p>150 р</div>
-            </div>
-    
-          </div>
-    
-          <div class="p-2 mx-3 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center border discount_block_item good_item">
-            <img src="/alpha_tempaltes/img/goods/hard_seltzer.png" alt="" class="pb-2">
-    
-            <div class="discount_block_item_goods">
-              <p class="fs-6 px-3 m-0 discount_block_item_goods_name fs_n_light_italic">Lolipop</p>
-              <p class="m-0 mt-2 px-3 discount_block_item_goods_name_char fs_n_thin">Спелый лимон</p>
-              <div class="fs-6 px-3 discount_block_item_goods_price fs_n_black_italic"><p class="discount_block_item_goods_price_old fs_n_light">200 р</p>150 р</div>
-            </div>
-    
-          </div>
-    
-          <div class="p-2 mx-3 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center border discount_block_item good_item">
-            <img src="/alpha_tempaltes/img/goods/lolipop.png" alt="" class="pb-2">
-    
-            <div class="discount_block_item_goods">
-              <p class="fs-6 px-3 m-0 discount_block_item_goods_name fs_n_light_italic">Lolipop</p>
-              <p class="m-0 mt-2 px-3 discount_block_item_goods_name_char fs_n_thin">Спелый лимон</p>
-              <div class="fs-6 px-3 discount_block_item_goods_price fs_n_black_italic"><p class="discount_block_item_goods_price_old fs_n_light">200 р</p>150 р</div>
-            </div>
-    
-          </div>
-    
-          <div class="p-2 mx-3 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center border discount_block_item good_item">
-            <img src="/alpha_tempaltes/img/goods/lolipop.png" alt="" class="pb-2">
-    
-            <div class="discount_block_item_goods">
-              <p class="fs-6 px-3 m-0 discount_block_item_goods_name fs_n_light_italic">Lolipop</p>
-              <p class="m-0 mt-2 px-3 discount_block_item_goods_name_char fs_n_thin">Спелый лимон</p>
-              <div class="fs-6 px-3 discount_block_item_goods_price fs_n_black_italic"><p class="discount_block_item_goods_price_old fs_n_light">200 р</p>150 р</div>
-            </div>
-    
-          </div>
-    
-    
+          <button id="scrollLeft" class="btn btn-warning btn_slider d-none d-lg-flex" style="left:-20px;"><i class="fa-solid fa-arrow-left"></i></button>
+          <button id="scrollRight" class="btn btn-warning btn_slider d-none d-lg-flex" style="right:0;"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
     
-    
-    
-      </div>
-
     {% endblock content %}
+
+    {% block scripts %}
+      <script src={% static "main/js/scrols_adds_index.js" %}></script>
+    {% endblock scripts %}
