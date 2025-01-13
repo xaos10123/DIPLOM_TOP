@@ -12,6 +12,7 @@
 
     <link rel="stylesheet" href={% static "main/css/fonts.css" %}>
     <link rel="stylesheet" href={% static "main/css/main.css" %}>
+    <link rel="stylesheet" href={% static "goods/css/catalog.css" %}>
 
     {% block header_link %}
     {% endblock header_link %}
@@ -74,7 +75,7 @@
         }
     </style>
 
-    <title>{{ title }}</title>
+    <title>ICE BEAR MARKET</title>
 </head>
 
 <body>
@@ -82,10 +83,10 @@
         {% include "main/include_header.html" %}
     </header>
 
-
-    {% block content %}
-    {% endblock content %}
-
+    <div class="container" id="main_container">
+        {% block content %}
+        {% endblock content %}
+    </div>
 
     <footer>
         {% include "main/include_footer.html" %}
@@ -96,6 +97,8 @@
     crossorigin="anonymous"></script>
 
     <script src="https://kit.fontawesome.com/e101f4c7cf.js" crossorigin="anonymous"></script>
+
+    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
 
     {% block scripts %}
     {% endblock scripts %}

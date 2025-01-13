@@ -1,4 +1,4 @@
-{% extends "main/base.html" %}
+
 {% load static %}
 
     {% block header_link %}
@@ -8,11 +8,15 @@
 
     {% block content %}
         
-    <div class="container">
+
         <div class="row row-cols-6 pt-4">
 
           {% for category in categories  %}
-            <a href='#' class="col p-0">
+            <a href='#'
+              hx-get="{% url "goods:category" category.slug %}"
+              hx-target="#main_container"
+              hx-push-url="true"
+             class="col p-0">
               <div class="icon_menu">
                 <div class="icon_menu_wrapper">
                   <img src="{{ category.image.url }}" alt="{{ category.name }}" class=" ">
@@ -142,6 +146,6 @@
     
     
     
-      </div>
+
 
     {% endblock content %}

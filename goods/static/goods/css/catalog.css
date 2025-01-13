@@ -30,6 +30,7 @@
   color: #298BED;
   width: 100%;
   text-align: center;
+  line-height: 10px;
 }
 .item_add_to_card {
   display: none;
@@ -117,6 +118,18 @@
 .item:hover .item_border_out {
   background: repeating-conic-gradient(from var(--a), #f5b727 0%, #f5b727 5%, transparent 5%, transparent 40%, #f5b727 50%);
   animation: rotate 7s linear infinite;
+}
+
+.modal_btn {
+  color: rgba(0, 0, 0, 0.5);
+  border: none;
+  background: none;
+  width: 30px;
+  outline: none !important;
+}
+.modal_btn:focus {
+  border: none;
+  outline: none;
 }
 
 .filter_block {
