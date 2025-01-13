@@ -123,7 +123,6 @@
 .discount_block_item_goods_price_old {
   margin-right: 5%;
   color: rgba(0, 0, 0, 0.3);
-  text-decoration: line-through;
   padding-bottom: 0;
   margin-bottom: 0;
 }
@@ -148,6 +147,15 @@
   left: 5%;
   animation: finger_anim 2s linear 5;
   opacity: 0;
+}
+
+.btn_slider {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 50%;
+  width: 30px;
 }
 
 .good_item {
