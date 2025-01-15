@@ -1,7 +1,13 @@
     <div class="row mt-3">
       <div class="d-none d-lg-block col-lg-3">
         <div class="filter_block p-2">
-          <p class="filter_block_name fs-5 fs_n_thin_italic">Фильтры</p>
+
+          <div class="filter_block_content">
+            
+            {% include "goods/form_filters.html" %}
+
+            
+          </div>
         </div>
       </div>
 
@@ -12,14 +18,14 @@
 
       <div class="collapse mb-3" id="collapseExample">
         <div class="filter_block p-2">
-          <p class="filter_block_name fs-4 fs_n_thin_italic">Фильтры SM</p>
+          {% include "goods/form_filters.html" %}
         </div>
       </div>
 
 
       <div class="col-lg-9">
 
-        <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 g-3">
+        <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 g-3" id="goods_list">
             {% for item in goods %}
               {% include "goods/include_item.html" %}
             {% endfor %}          

@@ -1,78 +1,99 @@
 {% load static %}
-<div class="col align-items-center item" data-item-id="1">
 
-    <div class="item_border_out p-1 border-bottom border-2">
+<button class="no_fill_button">
+    <div class="col align-items-center item" data-item-id="{{ item.pk }}" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ item.id }}">
 
-        <div class="item_border_in border-top border-1 p-2">
+        <div class="item_border_out p-1 border-bottom border-2">
 
-            <div class="row position-relative base_container_item">
+            <div class="item_border_in border-top border-1 p-2">
 
-                <div class="position-absolute label_category fs_n_thin_italic">
-                    {{ item.category }}
+                <div class="row position-relative base_container_item">
+
+                    <div class="position-absolute label_category fs_n_thin_italic">
+                        {{ item.category }}
+                    </div>
+
+                    {% if item.image %}
+                        <img src="{{ item.image.url }}" class="item_img" alt="{{item.name}}_{{item.char}}">
+                    {% else  %}
+                        <img src={% static "main/img/no_img.png" %} class="item_img" alt="no_ing">
+                    {% endif %}
+
+                    {% if item.discaunt != 0 %}
+                        <div
+                        class="position-absolute label_sale "><p>{{ item.discaunt }}%</p></div>
+                    {% endif %}
+                
+                    <div class="col ps-4 flex-column">
+                        <div class="item_name fs-4">
+                            {{ item.name }}
+                        </div>
+                        <div class="item_characteristic text-body-tertiary fs_n_thin_italic" style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            {{ item.char }}
+                        </div>
+                    </div>
+
+                    <div class="row ps-4 pt-2 w-100">
+
+                        <div class="col d-flex align-items-center justify-content-around w-100 pe-0">
+
+                            <div class="float-start fs-6 fs_n_thin_italic">Цена:</div>
+
+                            <div class="item_price fs_n_black fs-4 p-0" style="{% if item.discaunt != 0 %}color:#dc3545;{% endif %}">{{ item.price }}₽</div>
+                            
+                            
+                                <i class="fa-solid fa-plus fs-3 text-secondary"></i>
+
+                        </div>
+
+                    </div>                           
+
                 </div>
 
+            </div>
+        </div>
+    </div>
+</button>
+
+<div class="modal fade" id="exampleModal_{{ item.id }}" tabindex="-1" data-bs-backdrop="static"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered modal-sm" >
+        <div class="modal-content">
+            <div class="modal-header" style="border:none;">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body d-flex flex-column align-items-center p-0">
                 {% if item.image %}
-                    <img src="{{ item.image.url }}" class="item_img" alt="{{item.name}}_{{item.char}}">
+                    <img src="{{ item.image.url }}" class="item_img" alt="{{item.name}}_{{item.char}}" style="border-radius: 0px;">
                 {% else  %}
-                    <img src={% static "main/img/no_img.png" %} class="item_img" alt="no_ing">
+                    <img src={% static "main/img/no_img.png" %} class="item_img" alt="no_ing" style="border-radius: 0px;">
                 {% endif %}
-
-                {% if item.discaunt != 0 %}
-                    <div
-                    class="position-absolute label_sale "><p>{{ item.discaunt }}%</p></div>
-                {% endif %}
-            
-                <div class="col ps-4 flex-column">
-                    <div class="item_name fs-4">
-                        {{ item.name }}
-                    </div>
-                    <div class="item_characteristic text-body-tertiary fs_n_thin_italic" style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                        {{ item.char }}
-                    </div>
-                </div>
-
-                <div class="row ps-4 pt-2 w-100">
-                    <div class="col d-flex align-items-center justify-content-around w-100 pe-0">
-                        <div class="float-start fs-6 fs_n_thin_italic">Цена:</div>
-
-                        
-
-                        <div class="item_price fs_n_black fs-4 p-0" style="{% if item.discaunt != 0 %}color:#dc3545;{% endif %}">{{ item.price }}₽</div>
-
-    
-                        <button type="button" class="modal_btn float-end d-flex align-items-center p-0" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ item.id }}">
-                            <i class="fa-solid fa-plus fs-3"></i>
-                          </button>
-
-                    </div>
-                </div>                           
-
-            </div>
-
-            <div class="modal fade" id="exampleModal_{{ item.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
-                <div class="modal-dialog modal-dialog-centered modal-sm" >
-                    <div class="modal-content">
-                        <div class="modal-header" style="border:none;">
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <h1 class="p-0 m-0 mt-3">{{item.name}}</h1>
+                            <p class="p-0 m-0 fs-6 fs_n_thin_italic">{{item.char}}</p>
                         </div>
+                    </div>
 
-                        <div class="modal-body d-flex flex-column align-items-center p-0">
-                            {% if item.image %}
-                                <img src="{{ item.image.url }}" class="item_img" alt="{{item.name}}_{{item.char}}" style="border-radius: 0px;">
-                            {% else  %}
-                                <img src={% static "main/img/no_img.png" %} class="item_img" alt="no_ing" style="border-radius: 0px;">
-                            {% endif %}
+                    <div class="row py-3">
+                        <div class="col">
+                            <i class="fa-solid fa-plus float-end btn btn-outline-dark" onclick="alert('test')"></i>
                         </div>
-
-                        <div class="modal-footer d-flex align-items-center justify-content-center">
-                            <button type="button" class="btn btn-secondary fs_n_thin_italic" data-bs-dismiss="modal">Закрыть</button>
-                            <button type="button" class="btn btn-primary fs_n_thin_italic">Добавить <i class="fa-solid fa-cart-plus ms-2"></i></button>
+                        <div class="col text-center fs_n_semi_bold">
+                            1
+                        </div>
+                        <div class="col">
+                            <i class="fa-solid fa-minus float-start btn btn-outline-dark"></i>
                         </div>
                     </div>
                 </div>
             </div>
 
-
+            <div class="modal-footer d-flex align-items-center justify-content-center">
+                <button type="button" class="btn btn-secondary fs_n_thin_italic" data-bs-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary fs_n_thin_italic">Добавить <i class="fa-solid fa-cart-plus ms-2"></i></button>
+            </div>
         </div>
     </div>
 </div>

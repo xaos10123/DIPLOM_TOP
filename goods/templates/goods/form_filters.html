@@ -1,0 +1,60 @@
+<form
+             hx-get="{% url "goods:filter" %}" 
+             hx-target="#goods_list"
+             hx-trigger="input delay:500ms"
+             id="myForm"
+             >
+                <div class="col">
+
+                    <div class="filter_block_content_search"> 
+                    <label for="name" class="filter_block_content_search_label fs_n_semi_bold">Поиск:</label>
+                    <input type="text" id="name" name="name" step="1" placeholder="Название или вкус" class="filter_block_content_search_input fs_n_thin_italic">
+                    </div> 
+
+                    <p class="p-0 m-0 mb-2 fs_n_bold_italic">Выберите категорию:</p>
+
+                    <input type="radio" name="category" id="category_all" value="" checked>
+                    <label class="filter_block_category my-1 fs_n_thin_italic" for="category_all">
+                    Все напитки <span class="badge text-bg-secondary ms-auto">{{ goods.count}}</span>
+                    </label>
+
+                </div>
+
+                {% for cat in categories %}
+                    <div class="col">
+                    <input type="radio" name="category" id="category_{{cat.id}}" value="{{ cat.id}}">
+                    <label class="filter_block_category w-100 my-1 fs_n_thin_italic" for="category_{{cat.id}}">
+                        {{ cat.name }} <span class="badge text-bg-secondary ms-auto">{{ cat.products.count}}</span>
+                    </label>
+                    </div>
+                {% endfor %}
+
+              <input type="checkbox" name="sale" id="category_sale" value="sale">
+                <label class="filter_block_category my-4 fs_n_thin_italic d-flex align-items-center justify-content-between" for="category_sale">
+                  Только по акции
+                </label>
+
+
+
+              <p class="p-0 m-0 mt-2 fs_n_bold_italic">Укажите диапазон цены:</p>
+              <div class="filter_block_content_price">
+                <input class="filter_block_content_price_min fs_n_thin_italic" type="number" name="min_price" step="1" placeholder="от {{ price_stats.min_price }}">
+                <input class="filter_block_content_price_max fs_n_thin_italic" type="number" name="max_price" step="1" placeholder="до {{ price_stats.max_price }}">
+              </div>
+
+              <hr>
+
+              <p class="p-0 m-0 mb-2 fs_n_bold_italic">Укажите диапазон цены:</p>
+
+              <input type="radio" name="oreding" id="oreding_min" value="price_asc">
+              <label class="filter_block_category my-1 fs_n_thin_italic" for="oreding_min">
+                Сначала дешевые
+              </label>
+
+              <input type="radio" name="oreding" id="oreding_max" value="price_desc">
+              <label class="filter_block_category my-1 fs_n_thin_italic" for="oreding_max">
+                Сначала дорогие
+              </label>
+
+              <button type="button" class="btn btn-secondary mt-3 w-100 fs_n_thin_italic" onclick="location.reload();">Сбросить фильтры</button>
+            </form>

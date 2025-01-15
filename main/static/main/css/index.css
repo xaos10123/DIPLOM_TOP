@@ -117,6 +117,7 @@
 }
 .discount_block_item_goods_price {
   display: flex;
+  justify-content: space-between;
   padding: 5px 10px 10px 10px;
   color: rgb(221, 52, 69);
 }

@@ -83,9 +83,13 @@
         {% include "main/include_header.html" %}
     </header>
 
-    <div class="container" id="main_container">
+    <div class="container" id="main_container" style="position: relative; min-height: 70vh!important;">
+
+
         {% block content %}
         {% endblock content %}
+
+
     </div>
 
     <footer>
@@ -103,8 +107,6 @@
     {% block scripts %}
     {% endblock scripts %}
 
-
-    {% comment %} <scri   pt src={% static "main/js/on_click_add_menu.js" %}></scri> {% endcomment %}
 
 </body>
 

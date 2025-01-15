@@ -1,7 +1,3 @@
-from email.mime import image
-from email.policy import default
-from math import floor
-from django.conf.locale import sl
 from django.db import models
 
 class Categories(models.Model):
