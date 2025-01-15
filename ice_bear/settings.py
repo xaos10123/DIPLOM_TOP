@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.postgres',
     'main',
     'goods',
 ]
@@ -79,8 +80,12 @@ WSGI_APPLICATION = 'ice_bear.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'icebear',
+        'USER': 'admin',
+        'PASSWORD': '101230',
+        'HOST': 'localhost',
+        'PORT': '5433',
     }
 }
 

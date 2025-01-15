@@ -4,6 +4,7 @@
              hx-trigger="input delay:500ms"
              id="myForm"
              >
+             <input type="hidden" name="page" value="1">
                 <div class="col">
 
                     <div class="filter_block_content_search"> 
@@ -15,14 +16,14 @@
 
                     <input type="radio" name="category" id="category_all" value="" checked>
                     <label class="filter_block_category my-1 fs_n_thin_italic" for="category_all">
-                    Все напитки <span class="badge text-bg-secondary ms-auto">{{ goods.count}}</span>
+                    Все напитки <span class="badge text-bg-secondary ms-auto">{{ all_items_count }}</span>
                     </label>
 
                 </div>
 
                 {% for cat in categories %}
                     <div class="col">
-                    <input type="radio" name="category" id="category_{{cat.id}}" value="{{ cat.id}}">
+                    <input type="radio" name="category" id="category_{{cat.id}}" value="{{ cat.id}}" {% if category_slug == cat.slug %}checked{% endif %}>
                     <label class="filter_block_category w-100 my-1 fs_n_thin_italic" for="category_{{cat.id}}">
                         {{ cat.name }} <span class="badge text-bg-secondary ms-auto">{{ cat.products.count}}</span>
                     </label>

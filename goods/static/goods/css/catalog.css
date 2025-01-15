@@ -139,7 +139,6 @@
 
 .filter_block {
   min-height: 20vh;
-  position: sticky;
   top: 2rem;
 }
 .filter_block_name {
@@ -213,6 +212,16 @@
   width: 10px;
   background-color: #f5b727;
   border-radius: 50%;
+}
+
+.htmx-indicator {
+  display: block;
+  color: #000000;
+}
+
+.htmx-request .htmx-indicator {
+  display: block;
+  color: #000000;
 }
 
 input[type=radio],

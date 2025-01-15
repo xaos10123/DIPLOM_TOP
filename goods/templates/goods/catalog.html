@@ -1,4 +1,5 @@
-    <div class="row mt-3">
+ {% load static %}
+ <div class="row mt-3">
       <div class="d-none d-lg-block col-lg-3">
         <div class="filter_block p-2">
 
@@ -30,7 +31,20 @@
               {% include "goods/include_item.html" %}
             {% endfor %}          
         </div>
+        
+
+         {% if page_obj.has_next %}
+          <div class="col" 
+          hx-get="{% url 'goods:filter' %}?page={{ page_obj.next_page_number }}"
+          hx-trigger="intersect once delay:100ms"                  
+          hx-target="#goods_list"
+          hx-swap="beforeend"
+            >
+          </div> 
+        {% endif %} 
 
 
       </div>
     </div>
+
+

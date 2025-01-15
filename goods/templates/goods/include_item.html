@@ -1,6 +1,8 @@
 {% load static %}
 
-<button class="no_fill_button">
+
+
+<button class="no_fill_button" {% if forloop.first %} hx-on="htmx:load:alert('sdfsdfsdfsdfsdf')"{% endif %} >
     <div class="col align-items-center item" data-item-id="{{ item.pk }}" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ item.id }}">
 
         <div class="item_border_out p-1 border-bottom border-2">
@@ -63,11 +65,11 @@
             </div>
 
             <div class="modal-body d-flex flex-column align-items-center p-0">
-                {% if item.image %}
+                {% comment %} {% if item.image %}
                     <img src="{{ item.image.url }}" class="item_img" alt="{{item.name}}_{{item.char}}" style="border-radius: 0px;">
                 {% else  %}
                     <img src={% static "main/img/no_img.png" %} class="item_img" alt="no_ing" style="border-radius: 0px;">
-                {% endif %}
+                {% endif %} {% endcomment %}
                 <div class="container">
                     <div class="row">
                         <div class="col text-center">
