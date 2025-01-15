@@ -7,7 +7,7 @@ class CustomHtmxMixin:
         # import pdb; pdb.set_trace()
         self.template_htmx = self.template_name
         if not self.request.META.get("HTTP_HX_REQUEST"):
-            self.template_name = "main/include_block.html"
+            self.template_name = "include_block.html"
 
         return super().dispatch(request, *args, **kwargs)
 
