@@ -26,7 +26,11 @@
              hx-target="#main_container"
              hx-push-url="true"
             >Каталог</a>
-            <a href="" class="col">Акции</a>
+            <a href="" 
+              hx-get="{% url "goods:catalog" %}"
+              hx-target="#main_container"
+              hx-push-url="true"
+             class="col">Акции</a>
             <a href="" class="col">Доставка</a>
           </div>
 

@@ -1,9 +1,7 @@
 from django.db.models import Q, Max, Min
-from django.shortcuts import render
 from django.views.generic import ListView
 from main.views import CustomHtmxMixin
 from .models import Product, Categories
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 class CatalogView(CustomHtmxMixin, ListView):
