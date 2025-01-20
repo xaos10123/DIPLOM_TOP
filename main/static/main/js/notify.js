@@ -4,12 +4,14 @@ function showNotification(message, type = 'success') {
     notification.className = `alert alert-${type} notification-toast`;
     notification.style.cssText = `
         position: fixed;
-        top: 30px;
-        right: calc(50% - 200px);
+        top: 20px;
+        right: 50%;
         z-index: 1000;
-        width: 400px;
+        width: 100%;
+        max-width: 400px;
         padding: 15px;
         border-radius: 20px;
+        transform: translateX(50%);
         animation: slideIn 0.5s ease-in-out;
         font-family: "NerisThin", sans-serif;
     `;
@@ -20,8 +22,8 @@ function showNotification(message, type = 'success') {
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideIn {
-            from { transform: translateY(100%); }
-            to { transform: translateY(0); }
+            from { transform: translateY(100%) translateX(50%); }
+            to { transform: translateY(0) translateX(50%); }
         }
         @keyframes fadeOut {
             from { opacity: 1; }

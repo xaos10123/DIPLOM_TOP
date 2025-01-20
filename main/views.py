@@ -26,3 +26,4 @@ class IndexView(CustomHtmxMixin, ListView):
         kwargs["items_bests"] = Product.objects.order_by('-order_amount')[:10]
 
         return super().get_context_data(**kwargs)
+    

@@ -1,18 +1,19 @@
 {% load carts_tags %}
+{% if user.is_authenticated %}
+    {% user_carts request as carts %}
 
-{% user_carts request as carts %}
+    {% for cart in carts %}
 
-{% for cart in carts %}
+    {% include "carts/include_item_carts.html" with item=cart.product%}
 
-{% include "carts/include_item_carts.html" with item=cart.product%}
+    {% if forloop.last %}
+        <div class="row pt-3">
+            <div class="col-6 fw-bold">Итого: {{ carts.total_price}} ₽</div>
+            <div class="col-6 d-flex justify-content-end pe-3">
+            <button class="btn btn-primary" type="button">Заказать</button>
+            </div>
+        </div> 
+    {% endif %}
 
-{% if forloop.last %}
-    <div class="row pt-3">
-        <div class="col-6 fw-bold">Итого: {{ carts.total_price}} ₽</div>
-        <div class="col-6 d-flex justify-content-end pe-3">
-        <button class="btn btn-primary" type="button">Заказать</button>
-        </div>
-    </div> 
-{% endif %}
-
-{% endfor %}
+    {% endfor %}
+    {% endif %}

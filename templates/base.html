@@ -115,6 +115,14 @@
             const detail = evt.detail;
             showNotification(detail.message, detail.type);
         });
+
+        document.body.addEventListener('updateCartCount', () => {
+            htmx.ajax('GET', '{% url "cart:get_count" %}', '#cart-count')
+        });
+
+        document.body.addEventListener('showModal', (evt) => {
+            htmx.ajax('GET', evt.detail.url, '#main_container')
+        });
     </script>
 
     {% block scripts %}

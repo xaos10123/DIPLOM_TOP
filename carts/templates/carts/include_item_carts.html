@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-1 d-flex align-items-center justify-content-start">
                 <button type="button" class="btn-close fs-6 btn-danger"
-                    hx-post="{% url "cart:cart_remove" 1 %}"></button>
+                    hx-get="{% url "cart:cart_remove" cart.id %}" hx-swap="none"></button>
             </div>
 
           <div class="col-3 position-relative">

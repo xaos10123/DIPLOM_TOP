@@ -2,8 +2,8 @@
 <div class="dropdown">
       {% get_active_address user as active_address %}
       {% if active_address %}
-      <button class="btn btn-outline-primary dropdown-toggle" type="button" id="addressDropdown" data-bs-toggle="dropdown"  aria-expanded="false">
-        {{ active_address.city }}, ул. {{ active_address.street }}, д.{{ active_address.house }}, кв.{{ active_address.apartment }} 
+      <button class="btn btn-outline-primary dropdown-toggle" type="button" id="addressDropdown" data-bs-toggle="dropdown"  aria-expanded="false" style="">
+        {{ active_address.street }}, д.{{ active_address.house }}, кв.{{ active_address.apartment }} 
         </button>
       {% else %}
       <button
