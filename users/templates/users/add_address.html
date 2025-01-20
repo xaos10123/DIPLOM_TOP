@@ -1,0 +1,47 @@
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" id="modal_content">
+
+      <div class="modal-header">
+        <h5 class="modal-title text-center w-100 fs-2">Добавить адресс</h5>
+      </div>
+
+      <div class="modal-body">
+        
+
+          <form method="POST" action="{% url 'user:add_address' %}" style="max-width: 400px; margin: 0 auto;">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label class="form-label">Город</label>
+        <input type="text" name="city" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Улица</label>
+        <input type="text" name="street" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Дом</label>
+        <input type="text" name="house" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Квартира / Офис</label>
+        <input type="text" name="apartment" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Добавить адрес</button>
+</form>
+
+        
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+
+
+
+

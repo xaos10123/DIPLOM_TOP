@@ -30,7 +30,7 @@ class User(AbstractUser):
         verbose_name_plural = "Пользователи"
 
     def __str__(self):
-        return self.username
+        return f'(id:{self.pk}) {self.username}'
 
 
 class Adress(models.Model):
@@ -46,6 +46,7 @@ class Adress(models.Model):
     street = models.CharField(max_length=255, verbose_name="Улица")
     house = models.CharField(max_length=255, verbose_name="Дом")
     apartment = models.CharField(max_length=255, verbose_name="Квартира")
+    is_active = models.BooleanField(default=False, verbose_name="Активность", null=True, blank=True) 
 
     class Meta:
         verbose_name = "Адрес"
