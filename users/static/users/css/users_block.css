@@ -1,15 +1,18 @@
-.phone_block, .pass_block {
+.phone_block,
+.pass_block {
   display: flex;
   position: relative;
   margin-top: 30px;
 }
-.phone_block label, .pass_block label {
+.phone_block label,
+.pass_block label {
   position: absolute;
   top: -15px;
   left: 15px;
   background-color: #FFFFFF;
 }
-.phone_block input, .pass_block input {
+.phone_block input,
+.pass_block input {
   outline: none;
   background-color: none;
 }
@@ -26,4 +29,23 @@
 .login_footer a {
   font-size: 0.9rem;
   color: #298BED;
+}
+
+.error, .errors_block {
+  border: 2px #FF4880 solid;
+  padding: 10px;
+  background-color: rgba(255, 72, 128, 0.5);
+  border-radius: 20px;
+  font-family: "NerisBoldItalic";
+  text-align: center;
+}
+.error ul, .errors_block ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.error ul li, .errors_block ul li {
+  padding: 0;
+  margin: 0;
+  color: #000000;
 }/*# sourceMappingURL=users_block.css.map */

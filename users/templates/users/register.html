@@ -1,9 +1,60 @@
+{% load static %}
+
+    <link rel="stylesheet" href={% static "users/css/users_block.css" %}>
+
+
 <div class="modal-header">
     <h5 class="modal-title text-center w-100">Регистрация</h5>
   </div>
 
   <div class="modal-body">
-    
+    <form action="{% url "user:register" %}" method="post" id="Myregister_form">
+      {% csrf_token %}
+
+      <div class="phone_block">
+        <label for="id_phone" class="fs_n_semi_bold">Телефон:</label>
+        <input type="text" name="phone" id="id_phone" class="form-control fs_n_light_italic" placeholder="8(000)000-00-00" 
+        value="{% if form.phone.value %}{{ form.phone.value }}{% endif %}" required>        
+      </div>
+
+      {% if form.phone.errors %}
+      <div class="errors_block">
+       {{ form.phone.errors }}
+      </div>
+      {% endif %}
+
+
+      <div class="pass_block">
+        <label for="id_password1" class="fs_n_semi_bold">Пароль:</label>
+        <input type="password" name="password1" id="id_password1" class="form-control fs_n_light_italic" placeholder="Введите пароль"
+        value="{% if form.password.value %}{{ form.password.value }}{% endif %}" required>      
+      </div>
+
+      {% if form.password1.errors %}
+      <div class="errors_block">
+       {{ form.password1.errors }}
+      </div>
+      {% endif %}
+
+      <div class="pass_block">
+        <label for="id_password2" class="fs_n_semi_bold">Повторите пароль:</label>
+        <input type="password" name="password2" id="id_password2" class="form-control fs_n_light_italic" placeholder="Введите пароль"
+        value="{% if form.password.value %}{{ form.password.value }}{% endif %}" required>      
+      </div>
+
+      {% if form.password2.errors %}
+      <div class="errors_block">
+       {{ form.password2.errors }}
+      </div>
+      {% endif %}
+
+      <input type="submit" 
+              hx-post="{% url 'user:register' %}"
+              hx-target="#modal_content"
+              class="btn btn-primary mt-3 w-100 fs_n_light_italic"
+              value="Зарегистрироваться">
+
+    </form>
 
 
     
@@ -11,5 +62,22 @@
 
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
   </div>
+
+
+  
+
+   <script src="https://unpkg.com/imask"></script>
+  <script>    
+    var element = document.getElementById('id_phone');
+    var maskOptions = {
+        mask: '8(000)000-00-00',
+        lazy: false
+    } 
+    var mask = new IMask(element, maskOptions); 
+    document.getElementById('Myregister_form').addEventListener('change', (e) => {
+      document.getElementById('id_phone').value = '8' + mask.unmaskedValue;
+    });
+  </script>
+  

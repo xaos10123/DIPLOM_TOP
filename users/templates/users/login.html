@@ -13,7 +13,7 @@
       <div class="modal-body">
         
 
-          <form action="{% url 'user:login' %}" method="post">
+          <form action="{% url 'user:login' %}" method="post" id="login_Myform">
             {% csrf_token %}
 
             {% if form.non_field_errors %}
@@ -22,7 +22,7 @@
 
             <div class="phone_block">
               <label for="id_username" class="fs_n_semi_bold">Телефон:</label>
-              <input type="text" name="username" id="id_username" class="form-control fs_n_light_italic" placeholder="Введите номер телефона" 
+              <input type="text" name="username" id="id_username" class="form-control fs_n_light_italic" placeholder="8(000)000-00-00" 
               value="{% if form.username.value %}{{ form.username.value }}{% endif %}" required>
 
               
@@ -38,9 +38,9 @@
 
             <input type="submit" 
               hx-post="{% url 'user:login' %}"
-              hx-target="#main_container"
-              class="btn btn-primary"
-              data-bs-dismiss="modal"
+              hx-target="#modal_content"
+              hx-on = ""
+              class="btn btn-primary  w-100 fs_n_light_italic"
               value="Войти">
 
 
@@ -48,20 +48,35 @@
 
           </form>
 
-          <div class="login_footer">
+          <div class="login_footer mt-3">
             <a href="" class="fs_n_light">Забыли пароль?</a>
             <a href="" class="fs_n_light"
               hx-get="{% url 'user:register' %}"
-              hx-target="#main_container"
+              hx-target="#modal_content"
               hx-trigger="click delay:100ms">Зарегистироваться</a>
           </div>
 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
       </div>
       
     </div>
   </div>
 
 
+
+  <script src="https://unpkg.com/imask"></script>
+  <script>    
+    var element = document.getElementById('id_username');
+    var maskOptions = {
+        mask: '8(000)000-00-00',
+        lazy: false
+    } 
+    var mask = new IMask(element, maskOptions); 
+
+    document.getElementById('login_Myform').addEventListener('change', (e) => {
+      document.getElementById('id_username').value = '8' + mask.unmaskedValue;
+    }); 
+  </script>
+ 
