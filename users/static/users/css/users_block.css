@@ -1,0 +1,29 @@
+.phone_block, .pass_block {
+  display: flex;
+  position: relative;
+  margin-top: 30px;
+}
+.phone_block label, .pass_block label {
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  background-color: #FFFFFF;
+}
+.phone_block input, .pass_block input {
+  outline: none;
+  background-color: none;
+}
+
+.pass_block {
+  margin-bottom: 25px;
+}
+
+.login_footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.login_footer a {
+  font-size: 0.9rem;
+  color: #298BED;
+}/*# sourceMappingURL=users_block.css.map */

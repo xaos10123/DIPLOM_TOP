@@ -1,16 +1,30 @@
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasBasket" aria-labelledby="offcanvasBasketLabel">
     <div class="offcanvas-header">
       <h2 class="offcanvas-title" id="offcanvasBasketLabel">Корзина</h2>
-      <button
-        onclick="closeOffcanvasFirst()"
-        hx-get="{% url 'user:login' %}"
-        hx-target="#modals-here"
-        hx-trigger="click delay:100ms"
-        data-bs-toggle="modal"
-        data-bs-target="#modals-here"
-        class="btn btn-outline-primary ms-3">
-        <i class="fa-solid fa-user pe-2"></i>Войти
-      </button>
+      {% if user.is_authenticated %}
+        <form action="{% url 'user:logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit"
+            onclick="closeOffcanvasFirst()"
+            data-bs-toggle="modal"
+            class="btn btn-outline-primary ms-3">
+            <i class="fa-solid fa-user pe-2"></i>Выйти            
+          </button>
+        </form>
+      {% else %}
+        <button
+          onclick="closeOffcanvasFirst()"
+          hx-get="{% url 'user:login' %}"
+          hx-target="#modals-here"
+          hx-trigger="click delay:100ms"
+          data-bs-toggle="modal"
+          data-bs-target="#modals-here"
+          class="btn btn-outline-primary ms-3">
+          <i class="fa-solid fa-user pe-2"></i>Войти
+        </button>
+
+      {% endif %}
+
       <button type="button" class="btn-close fs-5" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body fs_n_light_italic fs-5 list-group list-group-flush" id="basket_list">
