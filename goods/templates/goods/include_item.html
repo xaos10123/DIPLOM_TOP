@@ -3,7 +3,7 @@
 
 
 <button class="no_fill_button" {% if forloop.first %} hx-on="htmx:load:alert('sdfsdfsdfsdfsdf')"{% endif %} >
-    <div class="col align-items-center item" data-item-id="{{ item.pk }}" data-bs-toggle="modal" data-bs-target="#exampleModal_{{ item.id }}">
+    <div class="col align-items-center item">
 
         <div class="item_border_out p-1 border-bottom border-2">
 
@@ -41,10 +41,11 @@
 
                             <div class="float-start fs-6 fs_n_thin_italic">Цена:</div>
 
-                            <div class="item_price fs_n_black fs-4 p-0" style="{% if item.discaunt != 0 %}color:#dc3545;{% endif %}">{{ item.price }}₽</div>
+                            <div class="item_price fs_n_black fs-4 p-0" style="{% if item.discaunt != 0 %}color:#dc3545;{% endif %}">{{ item.sell_price }}₽</div>
                             
                             
-                                <i class="fa-solid fa-plus fs-3 text-secondary"></i>
+                                <i class="fa-solid fa-plus fs-3 text-secondary" hx-get="{% url "cart:cart_add" item.slug%}" hx-swap="none"
+                                ></i>
 
                         </div>
 
@@ -57,45 +58,3 @@
     </div>
 </button>
 
-<div class="modal fade" id="exampleModal_{{ item.id }}" tabindex="-1" data-bs-backdrop="static"  aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered modal-sm" >
-        <div class="modal-content">
-            <div class="modal-header" style="border:none;">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-
-            <div class="modal-body d-flex flex-column align-items-center p-0">
-                {% comment %} {% if item.image %}
-                    <img src="{{ item.image.url }}" class="item_img" alt="{{item.name}}_{{item.char}}" style="border-radius: 0px;">
-                {% else  %}
-                    <img src={% static "main/img/no_img.png" %} class="item_img" alt="no_ing" style="border-radius: 0px;">
-                {% endif %} {% endcomment %}
-                <div class="container">
-                    <div class="row">
-                        <div class="col text-center">
-                            <h1 class="p-0 m-0 mt-3">{{item.name}}</h1>
-                            <p class="p-0 m-0 fs-6 fs_n_thin_italic">{{item.char}}</p>
-                        </div>
-                    </div>
-
-                    <div class="row py-3">
-                        <div class="col">
-                            <i class="fa-solid fa-plus float-end btn btn-outline-dark" onclick="alert('test')"></i>
-                        </div>
-                        <div class="col text-center fs_n_semi_bold">
-                            1
-                        </div>
-                        <div class="col">
-                            <i class="fa-solid fa-minus float-start btn btn-outline-dark"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer d-flex align-items-center justify-content-center">
-                <button type="button" class="btn btn-secondary fs_n_thin_italic" data-bs-dismiss="modal">Закрыть</button>
-                <button type="button" class="btn btn-primary fs_n_thin_italic">Добавить <i class="fa-solid fa-cart-plus ms-2"></i></button>
-            </div>
-        </div>
-    </div>
-</div>

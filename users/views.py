@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
+from carts.models import Cart
 from main.views import CustomHtmxMixin
 from users.forms import UserLoginForm, UserRegistrationForm
 from django.views.decorators.http import require_POST
@@ -62,7 +63,8 @@ def logout_view(request):
 
 
 def users_cart(request):
-    return render(request, "users/users_cart.html")
+    carts = Cart.objects.filter(user=request.user)
+    return render(request, "users/users_cart.html", {"carts": carts})
 
 
 @require_POST

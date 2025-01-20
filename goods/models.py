@@ -33,3 +33,9 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+    
+    def sell_price(self):
+        if self.discaunt > 0:
+            return int(self.price - self.price * self.discaunt / 100)
+        else:
+            return self.price

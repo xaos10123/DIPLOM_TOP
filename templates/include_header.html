@@ -35,7 +35,9 @@
           </div>
 
           <button class="btn btn-primary position-relative me-2" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasBasket" aria-controls="offcanvasBasket"><i class="fa-solid fa-cart-shopping"></i>
+            data-bs-target="#offcanvasBasket" aria-controls="offcanvasBasket"
+            hx-get="{% url "user:users_cart" %}"
+            hx-target="#cart_list"><i class="fa-solid fa-cart-shopping"></i>
             <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger fs_n_thin">
               1
             </span>

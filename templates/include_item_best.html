@@ -1,4 +1,4 @@
-<div class="p-2 mx-3 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center border discount_block_item good_item" onclick="alert('test')">
+<div class="p-2 mx-3 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center border discount_block_item good_item">
     
     <img src={{ item.image.url }} alt="" class="">
 
@@ -10,7 +10,7 @@
         <div class="fs-6 px-3 discount_block_item_goods_price fs_n_black_italic">
         {{ item.price }} р
         <p class="discount_block_item_goods_price_old fs_n_light">{{ item.discount }}</p> 
-        <i class="fa-solid fa-plus fs-6 float-end"></i>
+        <i class="fa-solid fa-plus fs-6 float-end" hx-get="{% url "cart:cart_add" item.slug%}" hx-swap="none"></i>
         </div>
 
     </div>
