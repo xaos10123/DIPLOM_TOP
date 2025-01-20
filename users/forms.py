@@ -1,6 +1,4 @@
-from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.forms import fields
 
 from users.models import User
 
@@ -21,8 +19,3 @@ class UserRegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
-
-
-    # phone = forms.CharField()
-    # password1 = forms.CharField()
-    # password2 = forms.CharField()
