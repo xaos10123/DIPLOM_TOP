@@ -11,4 +11,5 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(next_page="main:index"), name="logout"),
     path("set-active-address/", set_active_address, name="set_active_address"),
     path("add-address/", add_address, name="add_address"),
+    path("users_cart/", users_cart, name="users_cart"),
 ]

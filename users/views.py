@@ -61,6 +61,10 @@ def logout_view(request):
     return render(request, "users/logout.html")
 
 
+def users_cart(request):
+    return render(request, "users/users_cart.html")
+
+
 @require_POST
 @login_required
 def set_active_address(request):
