@@ -1,12 +1,12 @@
 function showNotification(message, type = 'success') {
 
     const notification = document.createElement('div');
-    notification.className = `alert alert-${type} notification-toast`;
+    notification.className = `alert alert-${type} notification-toast shadow`;
     notification.style.cssText = `
         position: fixed;
         top: 20px;
         right: 50%;
-        z-index: 1000;
+        z-index: 10000;
         width: 100%;
         max-width: 400px;
         padding: 15px;

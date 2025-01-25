@@ -1,12 +1,12 @@
  {% load static %}
- <a href="" class="list-group-item">
+ <div class="list-group-item">
         <div class="row">
             <div class="col-1 d-flex align-items-center justify-content-start">
-                <button type="button" class="btn-close fs-6 btn-danger"
-                    hx-get="{% url "cart:cart_remove" cart.id %}" hx-swap="none"></button>
+                <button type="button" class="btn" 
+                    hx-get="{% url "cart:cart_remove" cart.id %}" hx-swap="none"><i class="fa-solid fa-trash-can text-danger"></i></button>
             </div>
 
-          <div class="col-3 position-relative">
+          <div class="col-3 position-relative d-flex align-items-center justify-content-start">
 
             <img src="{{ item.image.url }}" class="baket_item_img" alt="{{ item.name }}">
             {% if item.discaunt != 0 %}
@@ -17,17 +17,41 @@
             {% endif %}
           </div>
 
-          <div class="col-6 position-relative">
-                <div class="row flex-column">
+          <div class="col-8 position-relative">
+
+            <div class="row d-flex flex-column">
+              <div class="col">{{ item.name }}</div>
+              <div class="col text-body-tertiary fs_n_thin_italic fs-6">{{ item.char }}</div>
+            </div>
+
+            <div class="row mt-sm-2">
+              <div class="col-2 d-flex align-items-center justify-content-start">
+                {% if cart.quantity == 1 %}
+                <button class="btn p-0 px-1 w-100" hx-get="{% url "cart:cart_remove" cart.id %}"><i class="fa-solid fa-trash-can text-danger"></i></button> 
+                {% else %}
+                <button class="btn p-0 px-1 w-100" hx-get="{% url "cart:cart_change" cart.id 'desc' %}"  hx-target="#quantity_{{ cart.id }}" ><i class="fa-solid fa-minus"></i> </button> 
+                {% endif %}
+                
+              </div>
+              <div class="col-1 text-center d-flex align-items-center" id="quantity_{{ cart.id }}">{{ cart.quantity }}</div>
+              <div class="col-2 d-flex align-items-center justify-content-start">
+                <button class="btn p-0 px-1 w-100" hx-get="{% url "cart:cart_change" cart.id 'inc' %}" hx-target="#quantity_{{ cart.id }}" >
+                  <i class="fa-solid fa-plus"></i>
+                </button>
+              </div>
+              <div class="col-3 text-center">x {{ item.sell_price }}</div>
+            </div>
+
+                {% comment %} <div class="row flex-column">
                     <div class="col">{{ item.name }}</div>
                     <div class="col text-body-tertiary fs_n_thin_italic fs-6">{{ item.char }}</div>
                 </div>
                 <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info fs_n_semi_bold">
                     {{ cart.quantity }} x {{ item.sell_price }}
-                </span>
+                </span> {% endcomment %}
           </div>
 
-          <div class="col-2 fs-6 p-0 d-flex align-items-center fs_n_semi_bold">{{ cart.products_price }} ₽</div>
+          {% comment %} <div class="col-2 fs-6 p-0 d-flex align-items-center fs_n_semi_bold">{{ cart.products_price }} ₽</div> {% endcomment %}
         </div>
-      </a>
+      </div>

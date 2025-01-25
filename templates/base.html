@@ -123,6 +123,10 @@
         document.body.addEventListener('showModal', (evt) => {
             htmx.ajax('GET', evt.detail.url, '#main_container')
         });
+
+        document.body.addEventListener('updateCartList', () => {
+            htmx.ajax('GET', '{% url "user:users_cart" %}', '#cart_list')
+        });
     </script>
 
     {% block scripts %}

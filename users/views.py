@@ -63,8 +63,10 @@ def logout_view(request):
 
 
 def users_cart(request):
-    carts = Cart.objects.filter(user=request.user)
+    carts = Cart.objects.filter(user=request.user).order_by('product__name', 'product__char')
+    print(carts)
     return render(request, "users/users_cart.html", {"carts": carts})
+
 
 
 @require_POST

@@ -89,4 +89,14 @@ a {
   100% {
     --a: 360deg;
   }
+}
+@media (max-width: 768px) {
+  .basket_canvas {
+    width: 100% !important;
+  }
+}
+@media (min-width: 769px) {
+  .basket_canvas {
+    width: 600px !important;
+  }
 }/*# sourceMappingURL=main.css.map */
