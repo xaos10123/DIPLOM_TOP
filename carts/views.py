@@ -20,6 +20,7 @@ def cart_add(request, product_slug):
         return response
     
     prod = Product.objects.get(slug=product_slug)
+    
     if request.user.is_authenticated:
         carts = Cart.objects.filter(user=request.user, product=prod)
         if carts.exists():
@@ -37,8 +38,9 @@ def cart_add(request, product_slug):
                     })
                     return response
                 else:
-                    cart.quantity += 1
+                    cart.quantity = F('quantity') + 1
                     cart.save()
+                    cart.refresh_from_db()
         else:
             Cart.objects.create(user=request.user, product=prod, quantity=1)
 
