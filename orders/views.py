@@ -24,6 +24,7 @@ def payment_order(request, order_id):
     items = OrderItem.objects.filter(order=order)
     for item in items:
         item.product.order_amount += item.quantity
+        item.product.quantity -= item.quantity
         item.product.save()
 
     return render(request, 'orders/payment.html', {'order': order})
@@ -57,10 +58,7 @@ def send_order(request):
                             name=name,
                             price=price,
                             quantity=quantity
-                        )
-                        product.quantity -= quantity
-                        
-                        product.save()
+                        )                        
                     
                     cart_items.delete()
                     
