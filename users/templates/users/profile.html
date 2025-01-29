@@ -7,6 +7,18 @@
     </div>
 </div>
 
+<div class="row mb-3">
+    <div class="col">
+        <p class="fs_n_thin">Ваши адреса:</p>
+        {% for adress in user.addresses.all %}
+            <div class="d-flex border-bottom align-items-center">
+                <button hx-get="{% url "user:del_address" adress.id %}" hx-target="#main_container" class="btn"><i class="fa-solid fa-trash-can text-danger" aria-hidden="true"></i></button>
+                <p class="m-0 ms-3 fs_n_thin">{{adress}}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
 <div class="row">
     <div class="col">
 

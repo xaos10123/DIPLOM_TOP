@@ -111,3 +111,13 @@ def add_address(request):
         return redirect("main:index")
 
     return render(request, "users/add_address.html")
+
+@login_required
+def del_address(request, adress_id):
+    adress = Adress.objects.get(id=adress_id)
+    adress.delete()
+    adress_new = Adress.objects.filter(user=request.user).first()
+    adress_new.is_active = True
+    adress_new.save()
+    return redirect("user:profile")
+

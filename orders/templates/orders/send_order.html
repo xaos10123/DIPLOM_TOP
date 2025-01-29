@@ -1,12 +1,6 @@
-{% load static %}
 
-<p class="text-center">Ваш заказ передан в сборку!</p>
 
-<div class="d-flex align-items-center justify-content-center w-100 mb-5">
-    <img src={% static "img/order_yes.png" %} style="max-width:200px">
-</div>
+<button hx-get="{% url "orders:payment_order" order.id %}" hx-target="#basket_list" class="btn btn-primary">Оплатить</button>
 
-<a href="{% url "goods:catalog" %}"
-class="btn btn-primary mb-3" type="button">Новый заказ <i class="fa-solid fa-plus"></i></a>
 
 

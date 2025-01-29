@@ -15,6 +15,20 @@ def create_order(request):
     return render(request, 'orders/create_order.html')
 
 @login_required
+def payment_order(request, order_id):
+    order = Order.objects.get(id=order_id)
+    order.is_paid = True
+    order.status = 'В сборке'
+    order.save()
+
+    items = OrderItem.objects.filter(order=order)
+    for item in items:
+        item.product.order_amount += item.quantity
+        item.product.save()
+
+    return render(request, 'orders/payment.html', {'order': order})
+
+@login_required
 def send_order(request):
     if request.method == 'POST':
         try:
@@ -45,12 +59,12 @@ def send_order(request):
                             quantity=quantity
                         )
                         product.quantity -= quantity
-                        product.order_amount += quantity
+                        
                         product.save()
                     
                     cart_items.delete()
                     
-                    return render(request, 'orders/send_order.html')
+                    return render(request, 'orders/send_order.html', {'order': order})
 
         except ValidationError as e:
             response = HttpResponse()
@@ -59,7 +73,5 @@ def send_order(request):
                 'message': str(e),
                 'type': 'danger'
             },
-            # 'updateCartCount': True,
-            # 'updateCartList': True
             })
             return response

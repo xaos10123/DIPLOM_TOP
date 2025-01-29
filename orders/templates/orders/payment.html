@@ -1,0 +1,9 @@
+{% load static %}
+<p class="text-center">Ваш заказ оплачен и передан в сборку!</p>
+
+<div class="d-flex align-items-center justify-content-center w-100 mb-5">
+    <img src={% static "img/order_yes.png" %} style="max-width:200px">
+</div>
+
+<a href="{% url "goods:catalog" %}"
+class="btn btn-primary mb-3" type="button">Новый заказ <i class="fa-solid fa-plus"></i></a>

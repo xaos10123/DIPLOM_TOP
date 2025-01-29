@@ -53,4 +53,4 @@ class Adress(models.Model):
         verbose_name_plural = "Адреса"
 
     def __str__(self):
-        return f"{self.city} {self.street} {self.house} {self.apartment}"
+        return f"г.{self.city} ул.{self.street} дом {self.house} кв.{self.apartment}"
