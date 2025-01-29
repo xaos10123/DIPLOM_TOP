@@ -1,5 +1,3 @@
-from os import name
-from tabnanny import verbose
 from django.db import models
 
 from goods.models import Product

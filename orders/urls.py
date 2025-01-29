@@ -5,4 +5,6 @@ app_name = "orders"
 
 urlpatterns = [
     path("create_order/", create_order, name="create_order"),
+    path("send_order/", send_order, name="send_order"),
+    
 ]

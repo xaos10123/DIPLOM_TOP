@@ -55,15 +55,19 @@
             aria-controls="offcanvasMenu">Меню</button>
 
             <button class="btn btn-primary position-relative me-2" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasBasket" aria-controls="offcanvasBasket"
-            {% if user.is_authenticated %}
-            hx-get="{% url "user:users_cart" %}"
-            hx-target="#cart_list"{% endif %}><i class="fa-solid fa-cart-shopping"></i>
-            {% get_cart_items_count user as count %}
-            <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger fs_n_thin" id="cart-count">
-              {{ count }}
-            </span>
-          </button>
+              data-bs-target="#offcanvasBasket" aria-controls="offcanvasBasket"
+              {% if user.is_authenticated %}
+                hx-get="{% url "user:users_cart" %}"
+                hx-target="#cart_list"
+              {% endif %}>
+
+              <i class="fa-solid fa-cart-shopping"></i>
+
+              {% get_cart_items_count user as count %}              
+              <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger fs_n_thin" id="cart-count">
+                {{ count }}
+              </span>
+            </button>
 
         </div>
       </div>

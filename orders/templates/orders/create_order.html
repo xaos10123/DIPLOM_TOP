@@ -16,4 +16,10 @@ class="btn btn-outline-danger mb-3" type="button"><i class="fa-solid fa-arrow-le
 
 {% include "users/address_dropdown.html" %}
 
-    
+
+<form
+hx-post="{% url "orders:send_order" %}"
+hx-target="#basket_list">
+    {% csrf_token %}
+    <input type="submit" class="btn btn-primary w-100 mt-3" value="Оформить заказ">
+</form>
