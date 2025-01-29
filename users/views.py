@@ -5,6 +5,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from carts.models import Cart
 from main.views import CustomHtmxMixin
+from orders.models import Order
 from users.forms import UserLoginForm, UserRegistrationForm
 from django.views.decorators.http import require_POST
 
@@ -54,8 +55,16 @@ def registration_view(request):
 class ProfileView(CustomHtmxMixin, View):
     template_name = "users/profile.html"
 
-    def get(self, request):
-        return render(request, "users/profile.html")
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        return render(request, self.template_name, context)
+
+    def get_context_data(self, **kwargs):
+        context = {}
+        context["user_orders"] = Order.objects.filter(user=self.request.user).order_by('-created_timestamp')[:5]
+        return context
+    
+
 
 
 def logout_view(request):

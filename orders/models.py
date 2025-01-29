@@ -17,7 +17,7 @@ class OrderItemQueryset(models.QuerySet):
 
 
 class Order(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.SET_DEFAULT, verbose_name='Пользователь', default=None, blank=True, null=True)
+    user = models.ForeignKey(to=User, on_delete=models.SET_DEFAULT, verbose_name='Пользователь', default=None, blank=True, null=True, related_name='orders')
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     adress = models.ForeignKey(to=Adress, on_delete=models.SET_DEFAULT, verbose_name='Адрес', default=None)
     is_paid = models.BooleanField(default=False, verbose_name='Статус оплаты')

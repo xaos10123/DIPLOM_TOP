@@ -17,7 +17,11 @@
           </button>
         </form>
 
-        <button class="btn btn-outline-primary ms-3 fs_n_thin">{{ user.phone }}</button>
+        <button
+        hx-get="{% url "user:profile" %}"
+        hx-target="#main_container"
+        data-bs-dismiss="offcanvas"
+        class="btn btn-outline-primary ms-3 fs_n_thin">Кабинет</button>
 
       {% else %}
 
@@ -40,8 +44,8 @@
 
     <div class="offcanvas-body fs_n_light_italic fs-5 list-group list-group-flush" id="basket_list">
     
-      <div class="row mt-3 border-0 w-100" id="cart_list">
-
+      <div class="row mx-auto mt-3 border-0 w-100" id="cart_list">
+        
         {% include "users/users_cart.html" %}
       
       </div>

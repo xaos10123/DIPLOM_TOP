@@ -1,0 +1,60 @@
+
+
+<div class="row">
+    <div class="col">
+        <p class="text-center fs-4 fw-bold fs_n_thin">Кабинет пользователя {{ user }}</p>
+        <hr>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+
+        <div class="accordion" id="accordionExample">
+
+            {% for order in user_orders %}
+
+                <div class="accordion-item">
+
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed fs_n_thin" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_{{order.pk}}"      aria-expanded="false" aria-controls="collapse_{{order.pk}}">
+                            Заказ от {{ order.created_timestamp }} <br> Статус оплаты: {% if order.is_paid %} Оплачен {% else %} Ожидает оплату {% endif %} <br> Статус заказа: {{order.status}}
+                        </button>
+                       
+                    </h2>
+
+                    <div id="collapse_{{order.pk}}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                        
+                        <div class="accordion-body d-flex flex-column">
+                            <p class="fs_n_semi_bold">Товары в заказе:</p>
+                            <div class="d-flex">
+                                {% for item in order.items.all %}
+
+                                    <div class="m-2 position-relative d-flex flex-column justify-content-center align-items-center">
+                                        <img src="{{ item.product.image.url }}" class="baket_item_img" alt="{{ item.name }}" style="max-width:100px">
+                                        <p class="fs_n_semi_bold mb-0">{{ item.name }}</p>
+                                        <span
+                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info fs_n_semi_bold mb-0">
+                                            x {{ item.quantity }}
+                                        </span>
+                                        <button hx-get="{% url "cart:cart_add" item.product.slug%}" hx-swap="none" class="btn btn-outline-primary">Добавить</button>
+                                        
+                                    </div>
+
+                                {% endfor %}
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+            {% endfor %}
+            
+            
+          </div>
+
+    </div>
+</div>
+
+
