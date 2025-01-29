@@ -1,0 +1,19 @@
+{% load carts_tags %}
+{% user_carts request as carts %}
+{% get_cart_items_count user as count %}
+
+<a
+hx-get="{% url 'user:users_cart' %}"
+hx-target="#basket_list"
+hx-trigger="click delay:100ms"
+class="btn btn-outline-danger mb-3" type="button"><i class="fa-solid fa-arrow-left"></i> Изменить состав заказа</a>
+
+<p class="fw-bold text-center">Товаров в корзине: {{ count }}</p>
+<p class="fw-bold text-center">Сумма заказа: {{ carts.total_price}} ₽</p>
+
+
+<p class="fw-bold text-center">Проверьте выбранный адрес:</p>
+
+{% include "users/address_dropdown.html" %}
+
+    
