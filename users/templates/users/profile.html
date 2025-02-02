@@ -13,7 +13,7 @@
         {% for adress in user.addresses.all %}
             <div class="d-flex border-bottom align-items-center">
                 <button hx-get="{% url "user:del_address" adress.id %}" hx-target="#main_container" class="btn"><i class="fa-solid fa-trash-can text-danger" aria-hidden="true"></i></button>
-                <p class="m-0 ms-3 fs_n_thin">{{adress}}</p>
+                <p class="m-0 ms-3 fs_n_thin {% if adress.is_active %} fw-bold text-primary {% endif %}">{{adress}} {% if adress.is_active %} (Активный адрес) {% endif %}</p>
             </div>
         {% endfor %}
     </div>
@@ -49,7 +49,7 @@
                                             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info fs_n_semi_bold mb-0">
                                             x {{ item.quantity }}
                                         </span>
-                                        <button hx-get="{% url "cart:cart_add" item.product.slug%}" hx-swap="none" class="btn btn-outline-primary">Добавить</button>
+                                        <button hx-get="{% url "cart:cart_add" item.product.slug%}" hx-swap="none" class="btn btn-outline-primary fs_n_thin">Добавить</button>
                                         
                                     </div>
 

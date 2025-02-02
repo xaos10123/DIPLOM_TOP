@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic import DetailView
 from carts.models import Cart
 from main.views import CustomHtmxMixin
 from orders.models import Order
@@ -58,6 +59,7 @@ class ProfileView(CustomHtmxMixin, View):
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         return render(request, self.template_name, context)
+    
 
     def get_context_data(self, **kwargs):
         context = {}
