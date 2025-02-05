@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models.signals import m2m_changed
+from django.db.models.signals import m2m_changed, pre_delete
 from django.dispatch import receiver
 from goods.models import Product
 
@@ -30,3 +30,20 @@ def update_product_discount(sender, instance, action, pk_set, **kwargs):
             if int(instance.promo_discount) > product.discaunt:
                 product.discaunt = int(instance.promo_discount)
                 product.save()
+
+
+@receiver(pre_delete, sender=Promo)
+def update_discounts_on_promo_delete(sender, instance, **kwargs):
+    products = instance.promo_products.all()
+    
+    for product in products:
+        active_promos = product.promo_set.filter(
+            promo_status=True
+        ).exclude(id=instance.id)
+        
+        if active_promos.exists():
+            max_discount = max(active_promos.values_list('promo_discount', flat=True))
+            product.discaunt = int(max_discount)
+        else:
+            product.discaunt = 0
+        product.save()
