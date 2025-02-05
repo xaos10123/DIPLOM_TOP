@@ -33,7 +33,7 @@ class Product(models.Model):
         default_related_name = 'products'
 
     def __str__(self):
-        return self.name
+        return f'{self.name} {self.char}'
     
     def sell_price(self):
         if self.discaunt > 0:

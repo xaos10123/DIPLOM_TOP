@@ -31,43 +31,21 @@
     
         <p class="m-0 pt-2 fs-3">Наши акции</p>
         <div class="pt-2 discount_block">
+
+          {% for promo in list_promo %}
+          
+            <a hx-get="{% url "promo:promo_detail" promo.pk %}" hx-target="#main_container" class="p-2 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center discount_block_item"
+              style="background-color:#acd5f5fc; cursor: pointer;">
+              <p class="fs-5 discount_block_item_text fs_n_black_italic">{{ promo.promo_name }}</p>
+              <img src={{ promo.promo_image.url }} alt="{{ promo.promo_name }}" class="">
+            </a>
+
+          {% endfor %}
+    
+          
     
     
-          <div class="p-2 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center discount_block_item"
-            style="background-color:#acd5f5fc;">
-            <p class="fs-5 discount_block_item_text fs_n_black_italic">Скидка при покупке двух энергетиков!</p>
-            <img src={% static "main/img/discount/baner1.png" %} alt="" class="">
-          </div>
-    
-          <div class="p-2 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center discount_block_item"
-            style="background-color:#acd5f5fc;">
-            <p class="fs-5 discount_block_item_text fs_n_black_italic">Скидка на лимонад!</p>
-            <img src={% static "main/img/discount/baner1.png" %} alt="" class="">
-          </div>
-    
-          <div class="p-2 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center discount_block_item"
-            style="background-color:#acd5f5fc;">
-            <p class="fs-5 discount_block_item_text fs_n_black_italic">Скидка при покупке двух энергетиков!</p>
-            <img src={% static "main/img/discount/baner1.png" %} alt="" class="">
-          </div>
-    
-          <div class="p-2 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center discount_block_item"
-            style="background-color:#acd5f5fc;">
-            <p class="fs-5 discount_block_item_text fs_n_black_italic">Скидка при покупке двух энергетиков!</p>
-            <img src={% static "main/img/discount/baner1.png" %} alt="" class="">
-          </div>
-    
-          <div class="p-2 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center discount_block_item"
-            style="background-color:#acd5f5fc;">
-            <p class="fs-5 discount_block_item_text fs_n_black_italic">Скидка при покупке двух энергетиков!</p>
-            <img src={% static "main/img/discount/baner1.png" %} alt="" class="">
-          </div>
-    
-          <div class="p-2 fs-4 fs_n_thin_italic lh-1 d-flex flex-column align-items-center discount_block_item"
-            style="background-color:#acd5f5fc;">
-            <p class="fs-5 discount_block_item_text fs_n_black_italic">Скидка при покупке двух энергетиков!</p>
-            <img src={% static "main/img/discount/baner1.png" %} alt="" class="">
-          </div>
+          
     
     
           <div class="finger d-block d-xxl-none"><i class="fa-solid fa-hand-point-up"></i></div>

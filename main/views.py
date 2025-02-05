@@ -1,5 +1,6 @@
 from django.views.generic import ListView
 from goods.models import Categories, Product
+from promotions.models import Promo
 
 
 class CustomHtmxMixin:
@@ -24,6 +25,7 @@ class IndexView(CustomHtmxMixin, ListView):
     def get_context_data(self, **kwargs):
         kwargs["title"] = 'Главная страница'
         kwargs["items_bests"] = Product.objects.order_by('-order_amount')[:10]
+        kwargs["list_promo"] = Promo.objects.filter(promo_status=True)[:10]
 
         return super().get_context_data(**kwargs)
     

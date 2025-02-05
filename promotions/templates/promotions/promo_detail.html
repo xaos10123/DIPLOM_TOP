@@ -1,0 +1,20 @@
+<p class="text-center fs-3 fs_n_semi_bold">Акция "{{ promo.promo_name }}"</p>
+<p class="text-center fs_n_light">до {{ promo.promo_end_date }}</p>
+
+<p class="fs_n_light px-3">{{ promo.promo_description }}</p>
+
+<p class="fs_n_light fs-4">Товары учавствующие в акции:</p>
+
+<div class="d-flex flex-wrap align-items-center justify-content-center bg-body-tertiary border border-1 border-primary-subtle rounded p-3">
+
+    {% for item in promo.promo_products.all %}
+
+        <div class="col-12 col-md-6 col-lg-4" style="max-width: 250px;">
+
+            {% include "goods/include_item.html" with item=item %}
+
+        </div>
+
+    {% endfor %}
+
+</div>
