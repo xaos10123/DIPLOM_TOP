@@ -10,8 +10,8 @@ class CategoriesAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    readonly_fields = ('order_amount', )
-    list_display = ('id', 'name', 'char', 'quantity', 'price', 'category')
+    readonly_fields = ('order_amount', 'discaunt',)
+    list_display = ('id', 'name', 'char', 'quantity', 'price', 'category',  'discaunt',)
     list_display_links = ('id', 'name', 'char')
     prepopulated_fields = {'slug': ('name', 'char',)}
 

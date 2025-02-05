@@ -19,7 +19,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=150, unique=True, blank=True, null=True, verbose_name='URL')
     image = models.ImageField(upload_to='products', blank=True, null=True, verbose_name='Изображение')
     price = models.IntegerField(verbose_name='Цена')
-    discaunt = models.IntegerField(default=0, verbose_name='Скидка')
+    discaunt = models.IntegerField(default=0, verbose_name='Скидка по акциям')
     category = models.ForeignKey(Categories, on_delete=models.PROTECT, verbose_name='Категория')
     quantity = models.PositiveIntegerField(default=0, verbose_name='Количество')
     order_amount = models.PositiveIntegerField(default=0, verbose_name='Количество заказов')
