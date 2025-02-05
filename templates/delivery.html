@@ -1,0 +1,32 @@
+{% load static %}
+
+<div class="container py-3">
+    <div class="row align-items-center bg-primary bg-opacity-10 rounded-4">
+        <div class="col-md-6 p-5">
+            <h2 class="display-4 fw-bold text-primary">Доставка за 15 минут!</h2>
+            <p class="lead fs_n_thin">Освежающие напитки прямо к вашей двери</p>
+            <div class="d-flex gap-3 align-items-center mt-4">
+                <i class="fas fa-truck-fast fs-1 text-primary"></i>
+                <div>
+                    <h4 class="mb-1 fs_n_semi_bold">Быстрая доставка</h4>
+                    <p class="mb-0 text-muted fs_n_light">По всему городу</p>
+                </div>
+            </div>
+            <div class="d-flex gap-3 align-items-center mt-3">
+                <i class="fas fa-temperature-low fs-1 text-primary"></i>
+                <div>
+                    <h4 class="mb-1 fs_n_semi_bold">Всегда холодные</h4>
+                    <p class="mb-0 text-muted fs_n_light">Доставляем в термосумках</p>
+                </div>
+            </div>
+            <a href="{% url "goods:catalog" %}" class="btn btn-primary btn-lg mt-4 px-4 w-100 fs_n_semi_bold">Заказать сейчас</a>
+        </div>
+        <div class="d-none d-md-block col-md-6 p-4">
+            <div class="d-flex justify-content-center">
+                <img src="{% static 'img/order_yes.png' %}" class="img-fluid w-50 w-sm-100" alt="Доставка напитков" style="width: 100%; max-width: 250px;">
+            </div>
+        </div>
+    </div>
+</div>
+
+
