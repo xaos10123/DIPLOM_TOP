@@ -1,4 +1,7 @@
 from django.contrib import admin
+
+from carts.admin import CartTabAdmin
+from orders.admin import OrderTabAdmin
 from .models import Adress, User
 
 @admin.register(Adress)
@@ -11,4 +14,4 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ('id','phone')
     list_display_links = ('id', 'phone')
 
-
+    inlines = [CartTabAdmin, OrderTabAdmin]
