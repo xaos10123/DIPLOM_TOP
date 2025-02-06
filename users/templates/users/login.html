@@ -49,7 +49,7 @@
           </form>
 
           <div class="login_footer mt-3">
-            <a href="" class="fs_n_light">Забыли пароль?</a>
+            <a href="" hx-get="{% url "user:password_reset" %}" hx-target="#modal_content" class="fs_n_light">Забыли пароль?</a>
             <a href="" class="fs_n_light"
               hx-get="{% url 'user:register' %}"
               hx-target="#modal_content"

@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import PasswordResetForm, UserCreationForm, AuthenticationForm
 
 from users.models import User
 
@@ -19,3 +19,8 @@ class UserRegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+class UserPasswordResetForm(PasswordResetForm):
+    def clean(self):
+        cleaned_data = super().clean()
+        return cleaned_data

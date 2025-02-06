@@ -13,7 +13,7 @@
             onclick="closeOffcanvasFirst()"
             data-bs-toggle="modal"
             class="btn btn-outline-danger ms-3 fs_n_thin">
-            <i class="fa-solid fa-user pe-2"></i>Выйти            
+            <i class="fa-solid fa-right-from-bracket pe-2"></i>Выйти            
           </button>
         </form>
 
@@ -21,7 +21,7 @@
         hx-get="{% url "user:profile" %}"
         hx-target="#main_container"
         data-bs-dismiss="offcanvas"
-        class="btn btn-outline-primary ms-3 fs_n_thin">Кабинет</button>
+        class="btn btn-outline-primary ms-3 fs_n_thin"><i class="fa-solid fa-user pe-2"></i>Кабинет</button>
 
       {% else %}
 

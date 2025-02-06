@@ -13,4 +13,5 @@ urlpatterns = [
     path("add-address/", add_address, name="add_address"),
     path("del_address/<int:adress_id>/", del_address, name="del_address"),
     path("users_cart/", users_cart, name="users_cart"),
+    path('password_reset/', password_reset_view, name='password_reset'),
 ]

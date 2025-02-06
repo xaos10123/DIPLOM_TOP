@@ -3,7 +3,7 @@
 {% if user.is_authenticated %}
 
     {% user_carts request as carts %}
-    
+    <p class="p-0 m-0 fs-6">Выбранный адрес для доставки:</p>
     {% include "users/address_dropdown.html" %}
 
     {% if carts %}
@@ -45,7 +45,7 @@
           hx-trigger="click delay:100ms"
           data-bs-toggle="modal"
           data-bs-target="#modals-here"
-          class="btn btn-primary ms-3 fs_n_thin">
+          class="btn btn-primary fs_n_thin">
           <i class="fa-solid fa-user pe-2"></i>Войти
         </button>
 

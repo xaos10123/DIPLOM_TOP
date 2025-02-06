@@ -1,16 +1,15 @@
 from django.contrib import auth
+from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import DetailView
 from carts.models import Cart
 from main.views import CustomHtmxMixin
 from orders.models import Order
-from users.forms import UserLoginForm, UserRegistrationForm
-from django.views.decorators.http import require_POST
-
+from users.forms import UserLoginForm, UserPasswordResetForm, UserRegistrationForm
 from users.models import Adress
+
 
 
 def login_view(request):
@@ -52,6 +51,23 @@ def registration_view(request):
         form = UserRegistrationForm()
     return render(request, "users/register.html", {"form": form})
 
+def password_reset_view(request):
+    if request.method == "POST":
+        form = UserPasswordResetForm(data=request.POST)     
+            
+        return render(
+            request,
+            "users/success_login.html",
+            {
+                "title_block": "Инструкции по восстановлению пароля отправлены!",
+                "link_to_text": "Закрыть окно",
+            },
+        )
+    else:
+        
+        form = UserPasswordResetForm()
+    return render(request, "users/password_reset.html", {"form": form})
+
 
 class ProfileView(CustomHtmxMixin, View):
     template_name = "users/profile.html"
@@ -59,14 +75,13 @@ class ProfileView(CustomHtmxMixin, View):
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(**kwargs)
         return render(request, self.template_name, context)
-    
 
     def get_context_data(self, **kwargs):
         context = {}
-        context["user_orders"] = Order.objects.filter(user=self.request.user).order_by('-created_timestamp')[:5]
+        context["user_orders"] = Order.objects.filter(user=self.request.user).order_by(
+            "-created_timestamp"
+        )[:5]
         return context
-    
-
 
 
 def logout_view(request):
@@ -74,9 +89,10 @@ def logout_view(request):
 
 
 def users_cart(request):
-    carts = Cart.objects.filter(user=request.user).order_by('product__name', 'product__char')
+    carts = Cart.objects.filter(user=request.user).order_by(
+        "product__name", "product__char"
+    )
     return render(request, "users/users_cart.html", {"carts": carts})
-
 
 
 @require_POST
@@ -114,6 +130,7 @@ def add_address(request):
 
     return render(request, "users/add_address.html")
 
+
 @login_required
 def del_address(request, adress_id):
     adress = Adress.objects.get(id=adress_id)
@@ -122,4 +139,3 @@ def del_address(request, adress_id):
     adress_new.is_active = True
     adress_new.save()
     return redirect("user:profile")
-
