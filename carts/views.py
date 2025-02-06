@@ -34,7 +34,7 @@ def cart_add(request, product_slug):
                             'type': 'danger'
                         },
                         'updateCartCount': True,
-                        'updateCartList': True
+                        'updateCartList': True,
                     })
                     return response
                 else:
@@ -51,7 +51,7 @@ def cart_add(request, product_slug):
             'type': 'primary'
         },
         'updateCartCount': True,
-        'updateCartList': True
+        'updateCartList': True,
     })
     return response
 
@@ -66,7 +66,7 @@ def cart_change(request, cart_id, to):
             cart.refresh_from_db()
             response = HttpResponse(cart.quantity)
             response['HX-Trigger'] = json.dumps({
-            'updateCartList': True
+            'updateCartList': True,
             })
             return response
         else: 
@@ -80,7 +80,7 @@ def cart_change(request, cart_id, to):
                 'type': 'danger'
             },
             'updateCartCount': True,
-            'updateCartList': True
+            'updateCartList': True,
             })
             return response
 
@@ -93,7 +93,7 @@ def cart_change(request, cart_id, to):
         response = HttpResponse(cart.quantity)
         response['HX-Trigger'] = json.dumps({
         'updateCartCount': True,
-        'updateCartList': True
+        'updateCartList': True,
         })
         return response
 
@@ -110,9 +110,10 @@ def cart_remove(request, cart_id):
             'type': 'danger'
         },
         'updateCartCount': True,
-        'updateCartList': True
+        'updateCartList': True,
     })
     return response
+
 
 @login_required
 def get_cart_count(request):

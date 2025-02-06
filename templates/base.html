@@ -125,7 +125,7 @@
         });
 
         document.body.addEventListener('updateCartList', () => {
-            htmx.ajax('GET', '{% url "user:users_cart" %}', '#cart_list')
+            htmx.ajax('GET', '{% url "user:users_cart" %}', '#basket_list')
         });
     </script>
 

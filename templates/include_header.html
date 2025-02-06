@@ -36,9 +36,11 @@
             hx-get="{% url "user:users_cart" %}"
             hx-target="#basket_list"{% endif %}><i class="fa-solid fa-cart-shopping"></i>
             {% get_cart_items_count user as count %}
+            
             <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger fs_n_thin" id="cart-count">
               {{ count }}
             </span>
+            
           </button>
 
         </div>
