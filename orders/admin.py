@@ -22,6 +22,7 @@ class OrderTabAdmin(admin.TabularInline):
     )
     search_fields = ("user__username",)
     extra = 1
+    fk_name="user"
 
 
 @admin.register(Order)
@@ -40,6 +41,7 @@ class OrderAdmin(admin.ModelAdmin):
     search_fields = ("user__username",)
     ordering = ("-created_timestamp",)
     readonly_fields = ("created_timestamp",)
+    fk_name="user"
 
     inlines = [
         OrderItemTabAdmin,

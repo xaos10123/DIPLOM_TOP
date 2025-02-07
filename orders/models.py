@@ -22,6 +22,7 @@ class Order(models.Model):
     adress = models.ForeignKey(to=Adress, on_delete=models.SET_DEFAULT, verbose_name='Адрес', default=None)
     is_paid = models.BooleanField(default=False, verbose_name='Статус оплаты')
     status = models.CharField(max_length=50, default='В обработке', verbose_name='Статус заказа')
+    delivery_man = models.ForeignKey(to=User, on_delete=models.SET_DEFAULT, verbose_name='Курьер', default=None, blank=True, null=True, related_name='delivery_orders')
 
     class Meta:
         verbose_name = 'Заказ'

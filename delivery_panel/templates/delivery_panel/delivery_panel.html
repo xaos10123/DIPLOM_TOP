@@ -1,1 +1,30 @@
-delivery_panel
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if perms.orders.can_view_orders %}
+        <div class="container">
+            <p class="text-center fs_n_light fs-4 btn btn-secondary w-100">Курьер ID_{{user.id}}</p>
+
+            <p class="text-center fs_n_light fs-4">Доступные заказы:</p>
+
+            <div class="row">
+                <div class="col d-flex flex-column justify-content-center align-items-center ">
+
+                    {% include "delivery_panel/include_order.html" %}
+
+                </div>
+            </div>
+
+        </div>
+
+    {% else %}
+    <a href="{% url "main:index" %}" class="btn btn-danger text-center w-100 my-5 py-3 fs-1">У вас нет прав для доступа к этой странице</a>
+
+    {% endif %}
+
+
+    
+
+
+{% endblock content %}
