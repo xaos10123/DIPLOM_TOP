@@ -1,3 +1,4 @@
+from colorfield.fields import ColorField
 from django.db import models
 from django.db.models.signals import m2m_changed, pre_delete
 from django.dispatch import receiver
@@ -5,6 +6,7 @@ from goods.models import Product
 
 
 class Promo(models.Model):
+    promo_color = ColorField(default="#acd5f5fc") 
     promo_name = models.CharField(max_length=255, verbose_name="Название акции")
     promo_description = models.TextField(verbose_name="Описание акции")
     promo_image = models.ImageField(

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.postgres',
     'django_q',
+    'colorfield',
     'main',
     'goods',
     'users',
