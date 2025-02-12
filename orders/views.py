@@ -4,6 +4,9 @@ from django.db import transaction
 from django.forms import ValidationError
 from django.http import HttpResponse
 from django.shortcuts import render
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+
 
 from carts.models import Cart
 from orders.models import Order, OrderItem
@@ -26,6 +29,16 @@ def payment_order(request, order_id):
         item.product.order_amount += item.quantity
         item.product.quantity -= item.quantity
         item.product.save()
+
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+        'couriers',
+        {
+            'type': 'new_order',
+            'message': 'Новый заказ создан!'
+        }
+    )
+
 
     return render(request, 'orders/payment.html', {'order': order})
 

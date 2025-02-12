@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'channels',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
     'django_q',
@@ -79,6 +80,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'ice_bear.wsgi.application'
+ASGI_APPLICATION = 'ice_bear.asgi.application'
 
 
 # Database

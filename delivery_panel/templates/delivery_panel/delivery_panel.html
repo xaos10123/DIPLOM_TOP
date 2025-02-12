@@ -29,6 +29,14 @@
 
 
     
+<script>
+    const socket = new WebSocket('ws://localhost:8000/ws/couriers/');
 
+    socket.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        console.log(data.message); 
+    };
+
+</script>
 
 {% endblock content %}
