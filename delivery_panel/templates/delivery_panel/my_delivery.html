@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% if perms.orders.can_view_orders %}
+        <div class="container">
+            {% if orders %}
+
+            <p class="text-center fs_n_light fs-4">Мои доставки:</p>
+            <a href="{% url "delivery:delivery_panel" %}" class="btn btn-primary w-100 py-2 fs_n_light mb-3">Выбрать доставку</a>
+            <div class="row">
+                <div class="col d-flex flex-column justify-content-center align-items-center " id="ordersContainer">
+
+                    {% for order in orders %}
+
+                        {% include "delivery_panel/include_order_in_delivery.html" %}
+
+                    {% endfor %}
+
+                </div>
+            </div>
+            {% else %}
+            <p class="text-center fs_n_light fs-4">У вас нет активных доставок!</p>
+            <a href="{% url "delivery:delivery_panel" %}" class="btn btn-primary w-100 py-2 fs_n_light">Выбрать доставку</a>
+            {% endif %}
+
+        </div>
+
+    {% else %}
+    <a href="{% url "main:index" %}" class="btn btn-danger text-center w-100 my-5 py-3 fs-1">У вас нет прав для доступа к этой странице</a>
+
+    {% endif %}
+
+
+
+{% endblock content %}
