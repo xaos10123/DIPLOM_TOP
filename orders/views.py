@@ -36,7 +36,11 @@ def payment_order(request, order_id):
         'couriers',
         {
             'type': 'new_order',
-            'message': 'Новый заказ создан!'
+            'message': {
+                'order_id': order.id,
+                'adress': str(order.adress),
+                'items': [{'name': item.name, 'quantity': item.quantity} for item in order.items.all()]
+            }
         }
     )
 

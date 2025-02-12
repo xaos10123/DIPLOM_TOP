@@ -12,4 +12,8 @@ class CouriersConsumer(AsyncWebsocketConsumer):
 
     async def new_order(self, event):
         message = event["message"]
-        await self.send(text_data=json.dumps({"message": message}))
+        await self.send(text_data=json.dumps({"message": message, 'type':'NEW_ORDER'}))
+
+    async def take_order(self, event):
+        message = event["message"]
+        await self.send(text_data=json.dumps({"message": message, 'type':'TAKE_ORDER'}))
