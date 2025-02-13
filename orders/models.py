@@ -64,6 +64,7 @@ class OrderItem(models.Model):
         verbose_name="Товар",
         null=True,
         default=None,
+        related_name="order_items",
     )
     name = models.CharField(max_length=255, verbose_name="Название")
     quantity = models.PositiveIntegerField(default=0, verbose_name="Количество")
