@@ -36,7 +36,6 @@ def get_order(request, pk):
 @login_required
 def my_delivery(request):
     order = Order.objects.filter(delivery_man=request.user, is_paid=True, status="В доставке").order_by("-id")
-    print(order)
     return render(request, "delivery_panel/my_delivery.html", {"orders": order})
 
 @login_required

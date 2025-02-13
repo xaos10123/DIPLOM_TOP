@@ -20,7 +20,6 @@ def create_order(request):
 
 @login_required
 def payment_order(request, order_id):
-    print("payment_order")
     order = Order.objects.get(id=order_id)
     order.is_paid = True
     order.status = "В сборке"

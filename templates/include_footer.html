@@ -23,8 +23,13 @@
       </div>
       <div class="col-md-4 footer_col d-flex flex-column">
         <p class="fs-5">Для персонала</p>
-        <a href="{% url "delivery:delivery_panel" %}" class="fs-6">Курьерам</a>
-        <a href={% url "admin:index" %} class="fs-6">Администрирование</a>
+        {% if user.is_staff %}
+          <a href="{% url "delivery:delivery_panel" %}" class="fs-6">Курьерам</a>
+          <a href={% url "admin:index" %} class="fs-6">Администрирование</a>
+        {% else %}
+          <p>Вы не являетесь членом персонала.</p>
+        {% endif %}
+        
         
       </div>
     </div>
