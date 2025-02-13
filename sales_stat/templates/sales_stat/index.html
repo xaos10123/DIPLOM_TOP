@@ -31,20 +31,20 @@
       <div class="col col-md-3">
         <p class="text-center fs_n_black btn btn-primary w-100">Меню</p>
         
-        <a href="{% url "sales_stat:index" %}" class="fs_n_light btn btn-outline-primary mb-2">Общая статистика</a>
-        <a href="{% url "sales_stat:best_sales" %}" class="fs_n_light btn btn-outline-primary mb-2">Самые продаваемые</a>
+        <a href="{% url "sales_stat:index" %}" class="fs_n_light btn btn-outline-primary mb-2 w-100">Общая статистика</a>
+        <a href="{% url "sales_stat:best_sales" %}" class="fs_n_light btn btn-outline-primary mb-2 w-100">Самые продаваемые</a>
       </div>
       <div class="col col-md-9" id="base_target">
 
         {% block stat_content %}
 
           <p class="text-center fs_n_light border-bottom mb-3 pb-2 fw-bold">Общая статистика по предложению товаров по категориям</p>
-          <div style="width: 400px; height: 400px;" class="mx-auto">
+          <div style="height: 400px;" class="mx-auto d-flex justify-content-center mb-5">
             <canvas id="base_count_items"></canvas>
           </div>
 
           <p class="text-center fs_n_light border-bottom mb-3 pb-2 fw-bold">Общая статистика по количеству заказов по дням</p>
-          <div style="width: 400px; height: 400px;" class="mx-auto">
+          <div style="height: 400px;" class="mx-auto d-flex justify-content-center mb-5">
             <canvas id="base_count_orders"></canvas>
           </div>
 
