@@ -8,7 +8,11 @@
 
           <div class="col-3 position-relative d-flex align-items-center justify-content-start">
 
-            <img src="{{ item.image.url }}" class="baket_item_img" alt="{{ item.name }}">
+            {% if item.image %}
+                        <img src="{{ item.image.url }}" class="item_img" alt="{{item.name}}_{{item.char}}">
+                    {% else  %}
+                        <img src={% static "main/img/no_img.png" %} class="item_img" alt="no_ing">
+                    {% endif %}
             {% if item.discaunt != 0 %}
                 <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger fs_n_thin"
                   style="font-size: 0.7rem;">

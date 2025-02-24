@@ -30,7 +30,7 @@ def get_order(request, pk):
                 }
             }
         )
-    return redirect(to="delivery:my_delivery")
+    return redirect(to="delivery:delivery_panel")
 
 
 @login_required

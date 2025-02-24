@@ -25,26 +25,21 @@
 
 
       <div class="col-lg-9">
-
+        
         <div class="row row-cols-2 row-cols-md-3 row-cols-xxl-4 g-3" id="goods_list">
-            {% for item in goods %}
-              {% include "goods/include_item.html" %}
-            {% endfor %}          
+          
+            <input type="hidden" name="" hx-get="{% url 'goods:filter' %}?page={{ page_obj.next_page_number }}&name=&category=&min_price=&max_price=&oreding=&sale="
+            hx-trigger="load"                  
+            hx-target="#goods_list">         
         </div>
         
 
-         {% if page_obj.has_next %}
-          <div class="col" 
-          hx-get="{% url 'goods:filter' %}?page={{ page_obj.next_page_number }}"
-          hx-trigger="intersect once delay:100ms"                  
-          hx-target="#goods_list"
-          hx-swap="beforeend"
-            >
-          </div> 
-        {% endif %} 
+         
 
 
       </div>
     </div>
+
+    
 
 

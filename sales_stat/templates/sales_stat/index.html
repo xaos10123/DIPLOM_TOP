@@ -33,6 +33,10 @@
         
         <a href="{% url "sales_stat:index" %}" class="fs_n_light btn btn-outline-primary mb-2 w-100">Общая статистика</a>
         <a href="{% url "sales_stat:best_sales" %}" class="fs_n_light btn btn-outline-primary mb-2 w-100">Самые продаваемые</a>
+        {% for category in categories %}
+        <a href="{% url "sales_stat:rem_goods" category.slug %}" class="fs_n_light btn btn-outline-primary mb-2 w-100">{{ category.name }}</a>
+        {% endfor %}
+
       </div>
       <div class="col col-md-9" id="base_target">
 
@@ -58,6 +62,7 @@
 
 {% block scripts %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 {% block in_scripts %}
     <script>
 
@@ -109,11 +114,17 @@
                   display: true,
                   text: 'Количество заказов',
                 },
+                ticks:{
+                  beginAtZero: true,
+                },
             },
             x: {
               title:{
                 display: true,
                 text: 'Дата',
+              },
+              ticks:{
+                beginAtZero: true,
               },
           }
         }

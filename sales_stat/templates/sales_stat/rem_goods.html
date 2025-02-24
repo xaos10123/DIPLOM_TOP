@@ -1,0 +1,60 @@
+{% extends "sales_stat/index.html" %}
+
+{% block stat_content %}
+    <canvas id="best_sales"></canvas>
+{% endblock stat_content %}
+
+
+{% block in_scripts %}
+<script>
+    let ctx_1 = document.getElementById('best_sales');
+    let chartData = JSON.parse('{{ chartData|safe }}');
+    console.log(chartData);
+
+    let data = {
+        labels: chartData.labels,
+        datasets: [{
+            label: 'Остатки товара',
+            data: chartData.data,            
+        }]
+    };
+    let config = {
+        type: 'bar',
+        data: data,
+        options: {
+            plugins: {
+                datalabels: {
+                    anchor: 'end', // Привязка меток к верхней части столбца
+                    align: 'end', // Выравнивание меток
+                    formatter: (value) => {
+                        return value; // Форматирование текста метки (можно настроить)
+                    },
+                    color: 'black', // Цвет текста меток
+                }
+            },
+            scales: {
+              y: {
+                  title:{
+                        display: true,
+                        text: 'Остатки товара на складах',
+                    },
+                    offset: true,
+                    
+                },
+              x: {
+                    ticks: {
+                        autoSkip: false, // Отключаем автоматическое пропускание меток
+                        maxRotation: 90, // Максимальный угол поворота текста
+                        minRotation: 90, // Минимальный угол поворота текста
+                    }
+                }
+          },
+          
+          plugins: [ChartDataLabels]
+        }
+    };
+
+    new Chart(ctx_1, config);
+
+</script>
+{% endblock in_scripts %}

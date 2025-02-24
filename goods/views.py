@@ -1,14 +1,12 @@
 from django.db.models import Q, Max, Min
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from main.views import CustomHtmxMixin
 from .models import Product, Categories
 
 
-class CatalogView(CustomHtmxMixin, ListView):
+class CatalogView(CustomHtmxMixin, TemplateView):
     model = Product
-    template_name = "goods/catalog.html"
-    context_object_name = "goods"
-    paginate_by = 12
+    template_name = "goods/catalog.html"    
 
     def get_context_data(self, **kwargs):
         kwargs["categories"] = Categories.objects.all()
@@ -41,32 +39,44 @@ class FilteredProductsView(ListView):
     context_object_name = "goods"
     paginate_by = 12
 
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        context["name"] = self.request.GET.get('name')
+        context["category"] = self.request.GET.get('category')
+        context["min_price"] = self.request.GET.get('min_price')
+        context["max_price"] = self.request.GET.get('max_price')
+        context["oreding"] = self.request.GET.get('oreding')
+        context["sale"] = self.request.GET.get('sale')
+        return context
+
     def get_queryset(self):
         self.template_name = "goods/filtered_items.html"
-        query = Q()
-
-        products = Product.objects.all()
-
+        products = Product.objects.none()
+        
         name = self.request.GET.get('name')
         category_id = self.request.GET.get('category')
         min_price = self.request.GET.get('min_price')
         max_price = self.request.GET.get('max_price')
         oreding = self.request.GET.get('oreding')
         sale = self.request.GET.get('sale')
+        print(name, category_id, min_price, max_price, oreding, sale)
 
-        if name:
-            for word in name.split():
-                query |= Q(name__icontains=word) | Q(char__icontains=word)
+        products = Product.objects.all()
+        
         if category_id:
-            query &= Q(category_id=category_id)
+            products = products.filter(category_id=category_id)
         if min_price:
-            query &= Q(price__gte=int(min_price))
+            products = products.filter(price__gte=int(min_price))
         if max_price:
-            query &= Q(price__lte=int(max_price))
+            products = products.filter(price__lte=int(max_price))
         if sale == 'sale':
-            query &= Q(discaunt__gt=0)
-
-        products = products.filter(query)
+            products = products.filter(discaunt__gt=0)
+        if name:
+            name_terms = name.split()
+            name_query = Q()
+            for term in name_terms:
+                name_query |= Q(name__icontains=term) | Q(char__icontains=term)
+            products = products.filter(name_query)
 
         if oreding:
             if oreding == 'price_asc':
@@ -74,8 +84,9 @@ class FilteredProductsView(ListView):
             elif oreding == 'price_desc':
                 products = products.order_by('-price')
 
-
-        if len(products)<1:
+        if not products.exists():
             self.template_name = 'goods/not_found_item.html'     
-  
-        return products
+
+        return products.distinct()
+    
+    

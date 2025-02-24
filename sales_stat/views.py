@@ -9,7 +9,7 @@ from goods.models import Categories, Product
 
 def index(request):
     category = Categories.objects.all()
-    orders_by_day = Order.objects.annotate(
+    orders_by_day = Order.objects.filter(status='Доставлен').annotate(
     date=TruncDate('created_timestamp')
     ).values('date').annotate(
         count=Count('id')
@@ -25,11 +25,10 @@ def index(request):
         "base_count_orders": {
             "labels": [item["date"] for item in result],
             "data": [item["count"] for item in result],
-            "type": "bar",
+            "type": "line",
         },
     }
     context = {
-        "categories": category,
         "chartData": json.dumps(data),
     }
     return render(request, "sales_stat/index.html", context=context)
@@ -46,3 +45,16 @@ def best_sales(request):
         "type": "bar",
     }
     return render(request, "sales_stat/best_sales.html", context=context)
+
+def rem_goods(request, category_slug):
+    qset = Product.objects.filter(category__slug=category_slug).order_by('-quantity')
+    data = {
+        "labels": [f'{item.name} {item.char}' for item in qset],
+        "data": [item.quantity for item in qset],
+    }
+    context = {
+        
+        "chartData": json.dumps(data),
+        "type": "bar",
+    }
+    return render(request, "sales_stat/rem_goods.html", context=context)
