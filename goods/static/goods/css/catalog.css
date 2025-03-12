@@ -279,4 +279,12 @@ input[type=number] {
 .not_found_img {
   width: auto;
   max-height: 300px;
+}
+
+.not_quantity {
+  opacity: 0.3;
+}
+
+.blur_img {
+  filter: blur(4px);
 }/*# sourceMappingURL=catalog.css.map */

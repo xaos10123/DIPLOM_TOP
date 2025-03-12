@@ -3,5 +3,8 @@
     <p class="fs-6">{{order.adress}}</p>                    
 
     <a href="{% url "delivery:close_order" order.pk %}" class="btn btn-success mb-2 fw-bold">ПОДТВЕРДИТЬ ДОСТАВКУ ЗАКАЗА</a>
+{% if not order.user.age_confirmed %}
+    <a href="{% url "delivery:confirm_age" order.pk %}" class="btn btn-secondary mb-2 fw-bold">ПОДТВЕРДИТЬ ВОЗРАСТ 18+</a>
+{% endif %}
 
 </div>

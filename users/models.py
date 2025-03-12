@@ -21,6 +21,7 @@ class CustomUserManager(BaseUserManager):
 
 class User(AbstractUser):
     phone = models.CharField(max_length=255, verbose_name="Телефон", unique=True)
+    age_confirmed = models.BooleanField(verbose_name="Возраст больше 18 подтвержден", default=False, blank=True)
 
     USERNAME_FIELD = "phone"
     objects = CustomUserManager()

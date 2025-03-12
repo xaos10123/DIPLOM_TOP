@@ -9,7 +9,6 @@
 <script>
     let ctx_1 = document.getElementById('best_sales');
     let chartData = JSON.parse('{{ chartData|safe }}');
-    console.log(chartData);
 
     let data = {
         labels: chartData.labels,
@@ -22,6 +21,7 @@
         type: 'bar',
         data: data,
         options: {
+            indexAxis: 'y',
             plugins: {
                 datalabels: {
                     anchor: 'end', // Привязка меток к верхней части столбца
@@ -34,20 +34,8 @@
             },
             scales: {
               y: {
-                  title:{
-                        display: true,
-                        text: 'Остатки товара на складах',
-                    },
-                    offset: true,
-                    
+                    offset: true,                    
                 },
-              x: {
-                    ticks: {
-                        autoSkip: false, // Отключаем автоматическое пропускание меток
-                        maxRotation: 90, // Максимальный угол поворота текста
-                        minRotation: 90, // Минимальный угол поворота текста
-                    }
-                }
           },
           
           plugins: [ChartDataLabels]

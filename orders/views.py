@@ -92,6 +92,8 @@ def send_order(request):
             response["HX-Trigger"] = json.dumps(
                 {
                     "showNotification": {"message": str(e), "type": "danger"},
+                    "updateCartCount": True,
+                    "updateCartList": True,
                 }
             )
             return response
