@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.postgres",
     "django_q",
+    "dashboards",
     "colorfield",
     "main",
     "goods",
@@ -52,6 +54,26 @@ INSTALLED_APPS = [
     "delivery_panel",
     'sales_stat',
 ]
+
+JAZZMIN_SETTINGS  = {
+    "theme": "default",
+    "site_title": "Админка IBM",
+    "site_header": "Админка IBM",
+    "site_brand": "ICE BEAR MARKET",
+    "welcome_sign": "Добро пожаловать в админ-панель!",
+    "copyright": "ICE BEAR MARKET",
+    "search_model":[ "goods.Product", "goods.Categories", "promotions.Promo"],
+    "site_logo": "img/logo_bear.svg",
+    "user_avatar": None,
+     "topmenu_links": [
+        {"name": "Главная страница",  "url": "admin:index"},
+        {"app": "goods"},
+        {"app": "promotions"},
+    ],
+    "hide_apps": ["django_q"],
+    "hide_models": ["orders.OrderItem", "users.Adress"],
+    "navigation_expanded": False,
+}
 
 MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
