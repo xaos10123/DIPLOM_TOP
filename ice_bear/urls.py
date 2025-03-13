@@ -23,6 +23,7 @@ from ice_bear import settings
 
 
 urlpatterns = [
+    path('admin/dashboards/', include('dashboards.urls')),
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('catalog/', include('goods.urls')),

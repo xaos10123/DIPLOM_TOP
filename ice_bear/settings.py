@@ -30,11 +30,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
 
 INSTALLED_APPS = [
     "jazzmin",
     "django.contrib.admin",
+    "dashboards",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.postgres",
     "django_q",
-    "dashboards",
     "colorfield",
     "main",
     "goods",
@@ -52,21 +51,22 @@ INSTALLED_APPS = [
     "orders",
     "promotions",
     "delivery_panel",
-    'sales_stat',
+    "sales_stat",
 ]
 
-JAZZMIN_SETTINGS  = {
+JAZZMIN_SETTINGS = {
     "theme": "default",
     "site_title": "Админка IBM",
     "site_header": "Админка IBM",
     "site_brand": "ICE BEAR MARKET",
     "welcome_sign": "Добро пожаловать в админ-панель!",
     "copyright": "ICE BEAR MARKET",
-    "search_model":[ "goods.Product", "goods.Categories", "promotions.Promo"],
+    "search_model":[ "goods.Product"],
     "site_logo": "img/logo_bear.svg",
     "user_avatar": None,
      "topmenu_links": [
         {"name": "Главная страница",  "url": "admin:index"},
+        {"name": "Статистика", "url": "dashboards:dashboard", "icon": "fa-regular fa-chart-bar"},
         {"app": "goods"},
         {"app": "promotions"},
     ],
@@ -86,17 +86,16 @@ JAZZMIN_SETTINGS  = {
         "orders.Order": "fa-solid fa-bag-shopping",
         "users": "fa-solid fa-users",
         "users.User": "fa-solid fa-user",
-
     },
-
-    # "custom_links": {
-    #     "goods": [{
-    #         "name": "Make Messages", 
-    #         "url": "catalog", 
-    #         "icon": "fas fa-comments",
-    #     }]
-    # },
+    "custom_links": {
+        None: [{
+            "name": "Статистика", 
+            "url": "dashboards:dashboard", 
+            "icon": "fa-regular fa-chart-bar",
+        }]
+    },
 }
+
 
 MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -122,7 +121,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                'sales_stat.context_processors.categories_processor',
+                "sales_stat.context_processors.categories_processor",
             ],
         },
     },
