@@ -73,6 +73,29 @@ JAZZMIN_SETTINGS  = {
     "hide_apps": ["django_q"],
     "hide_models": ["orders.OrderItem", "users.Adress"],
     "navigation_expanded": False,
+    "order_with_respect_to": ["auth", "goods", "goods.Product", "goods.Categories", "promotions", "carts"],
+    "icons": {
+        "goods": "fa-solid fa-boxes-stacked",
+        "goods.Product": "fa-brands fa-product-hunt",
+        "goods.Categories": "fa-solid fa-layer-group",
+        "promotions": "fa-solid fa-percent",
+        "promotions.Promo": "fa-solid fa-percent",
+        "carts": "fa-solid fa-cart-shopping",
+        "carts.Cart": "fa-solid fa-cart-plus",
+        "orders": "fa-regular fa-folder",
+        "orders.Order": "fa-solid fa-bag-shopping",
+        "users": "fa-solid fa-users",
+        "users.User": "fa-solid fa-user",
+
+    },
+
+    # "custom_links": {
+    #     "goods": [{
+    #         "name": "Make Messages", 
+    #         "url": "catalog", 
+    #         "icon": "fas fa-comments",
+    #     }]
+    # },
 }
 
 MIDDLEWARE = [
