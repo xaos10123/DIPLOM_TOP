@@ -30,10 +30,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
-# Application definition
 
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
+    "dashboards",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -50,7 +51,51 @@ INSTALLED_APPS = [
     "orders",
     "promotions",
     "delivery_panel",
+    "sales_stat",
 ]
+
+JAZZMIN_SETTINGS = {
+    "theme": "default",
+    "site_title": "Админка IBM",
+    "site_header": "Админка IBM",
+    "site_brand": "ICE BEAR MARKET",
+    "welcome_sign": "Добро пожаловать в админ-панель!",
+    "copyright": "ICE BEAR MARKET",
+    "search_model":[ "goods.Product"],
+    "site_logo": "img/logo_bear.svg",
+    "user_avatar": None,
+     "topmenu_links": [
+        {"name": "Главная страница",  "url": "admin:index"},
+        {"name": "Статистика", "url": "dashboards:dashboard", "icon": "fa-regular fa-chart-bar"},
+        {"app": "goods"},
+        {"app": "promotions"},
+    ],
+    "hide_apps": ["django_q"],
+    "hide_models": ["orders.OrderItem", "users.Adress"],
+    "navigation_expanded": False,
+    "order_with_respect_to": ["auth", "goods", "goods.Product", "goods.Categories", "promotions", "carts"],
+    "icons": {
+        "goods": "fa-solid fa-boxes-stacked",
+        "goods.Product": "fa-brands fa-product-hunt",
+        "goods.Categories": "fa-solid fa-layer-group",
+        "promotions": "fa-solid fa-percent",
+        "promotions.Promo": "fa-solid fa-percent",
+        "carts": "fa-solid fa-cart-shopping",
+        "carts.Cart": "fa-solid fa-cart-plus",
+        "orders": "fa-regular fa-folder",
+        "orders.Order": "fa-solid fa-bag-shopping",
+        "users": "fa-solid fa-users",
+        "users.User": "fa-solid fa-user",
+    },
+    "custom_links": {
+        None: [{
+            "name": "Статистика", 
+            "url": "dashboards:dashboard", 
+            "icon": "fa-regular fa-chart-bar",
+        }]
+    },
+}
+
 
 MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -76,6 +121,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "sales_stat.context_processors.categories_processor",
             ],
         },
     },

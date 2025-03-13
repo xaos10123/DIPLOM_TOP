@@ -23,6 +23,7 @@ from ice_bear import settings
 
 
 urlpatterns = [
+    path('admin/dashboards/', include('dashboards.urls')),
     path('admin/', admin.site.urls),
     path('', include('main.urls')),
     path('catalog/', include('goods.urls')),
@@ -31,6 +32,7 @@ urlpatterns = [
     path('orders/', include('orders.urls')),
     path('promo/', include('promotions.urls')),
     path('delivery_panel/', include('delivery_panel.urls')),
+    path('sales_stat/', include('sales_stat.urls')),
 ]
 
 if settings.DEBUG:

@@ -2,8 +2,9 @@
 
 
 
-<button class="no_fill_button" {% if forloop.first %} hx-on="htmx:load:alert('sdfsdfsdfsdfsdf')"{% endif %} >
-    <div class="col align-items-center item">
+<button class="no_fill_button {% if item.quantity == 0 %} not_quantity {% endif %}  position-relative" {% if forloop.first %} hx-on="htmx:load:alert('sdfsdfsdfsdfsdf')"{% endif %} >
+
+    <div class="col align-items-center item {% if not user.age_confirmed and item.category.pk == 2 %}blur_img{% endif %}">
 
         <div class="item_border_out p-1 border-bottom border-2">
 
@@ -43,9 +44,17 @@
 
                             <div class="item_price fs_n_black fs-4 p-0" style="{% if item.discaunt != 0 %}color:#dc3545;{% endif %}">{{ item.sell_price }}₽</div>
                             
-                            
+                            {% if item.quantity != 0 and user.age_confirmed %}  
                                 <i class="fa-solid fa-plus fs-3 text-secondary" hx-get="{% url "cart:cart_add" item.slug%}" hx-swap="none"
                                 ></i>
+                            {% elif item.quantity != 0 and not item.category.pk == 2 %}
+                                <i class="fa-solid fa-plus fs-3 text-secondary" hx-get="{% url "cart:cart_add" item.slug%}" hx-swap="none"
+                                ></i>
+
+                            
+                            {% endif %}
+
+                             
 
                         </div>
 
@@ -56,5 +65,13 @@
             </div>
         </div>
     </div>
+
+    {% if not user.age_confirmed and item.category.pk == 2 %}
+        <div class="position-absolute top-50 start-50 fs_n_black translate-middle text-light w-100" style="z-index: 10;">
+            <p class="btn btn-danger fs-2">18+</p>
+            <p class="btn btn-secondary p-0 w-75">Подтвердить возраст можно курьеру после первого заказа!</p>
+        </div>
+        
+    {% endif %}
 </button>
 

@@ -33,7 +33,8 @@ class Product(models.Model):
     price = models.IntegerField(verbose_name="Цена")
     discaunt = models.IntegerField(default=0, verbose_name="Скидка по акциям")
     category = models.ForeignKey(
-        Categories, on_delete=models.PROTECT, verbose_name="Категория"
+        Categories, on_delete=models.PROTECT, verbose_name="Категория",
+        related_name='products'
     )
     quantity = models.PositiveIntegerField(default=0, verbose_name="Количество")
     order_amount = models.PositiveIntegerField(

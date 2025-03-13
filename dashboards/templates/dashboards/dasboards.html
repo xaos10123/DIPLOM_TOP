@@ -1,0 +1,24 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}{{ block.super }}{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }} dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<div id="content-main">
+    <h1>Дашборд</h1>
+    <div class="dashboard-content">
+        {% for widget in dashboard.children %}
+            <div class="dashboard-widget">
+                {{ widget.title }}
+                {{ widget.content }}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

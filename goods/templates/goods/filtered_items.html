@@ -1,5 +1,4 @@
 
-
 {% for item in goods %}
 
     {% include "goods/include_item.html" %}
@@ -9,7 +8,7 @@
 {% if page_obj.has_next %}
 
               <div class="col" style="width: 1px; position: absolute; bottom: 0; right: 0;"
-                hx-get="{% url 'goods:filter' %}?page={{ page_obj.next_page_number }}"
+                hx-get="{% url 'goods:filter' %}?page={{ page_obj.next_page_number }}&name={{name}}&category={{category}}&min_price={{min_price}}&max_price={{max_price}}&oreding={{oreding}}&sale={{sale}}"
                 hx-trigger="intersect once"                  
                 hx-target="#goods_list"
                 hx-swap="beforeend"

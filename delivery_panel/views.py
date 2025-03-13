@@ -4,6 +4,7 @@ from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 
 from orders.models import Order
+from users.models import User
 
 
 @login_required
@@ -30,7 +31,7 @@ def get_order(request, pk):
                 }
             }
         )
-    return redirect(to="delivery:my_delivery")
+    return redirect(to="delivery:delivery_panel")
 
 
 @login_required
@@ -43,4 +44,12 @@ def close_order(request, pk):
     order = Order.objects.get(pk=pk)
     order.status = "Доставлен"
     order.save()
+    return redirect(to="delivery:my_delivery")
+
+@login_required
+def confirm_age(request, pk):
+    order = Order.objects.get(pk=pk)
+    user = User.objects.get(pk=order.user.pk)
+    user.age_confirmed = True
+    user.save()
     return redirect(to="delivery:my_delivery")

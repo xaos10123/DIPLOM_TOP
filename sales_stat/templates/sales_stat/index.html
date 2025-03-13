@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col">
+        <h2 class="fs_n_black text-center border-bottom mb-3 pb-2">Страница статистики</h2>
+    </div>
+</div>
+
+
+{% comment %} <div class="row row-cols-6 pt-4">
+
+    {% for category in categories  %}
+      <a href='#'
+        hx-get="{% url "goods:category" category.slug %}"
+        hx-target="#main_container"
+        class="col p-0">
+        <div class="icon_menu">
+          <div class="icon_menu_wrapper">
+            <p class="btn btn-outline-primary fs-5 fs_n_light_italic d-none d-md-block">{{ category.name }}</p>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+    
+  </div> {% endcomment %}
+
+  <div class="row">
+      <div class="col col-md-3">
+        <p class="text-center fs_n_black btn btn-primary w-100">Меню</p>
+        
+        <a href="{% url "sales_stat:index" %}" class="fs_n_light btn btn-outline-primary mb-2 w-100">Общая статистика</a>
+        <a href="{% url "sales_stat:best_sales" %}" class="fs_n_light btn btn-outline-primary mb-2 w-100">Самые продаваемые</a>
+        {% for category in categories %}
+        <a href="{% url "sales_stat:rem_goods" category.slug %}" class="fs_n_light btn btn-outline-primary mb-2 w-100">{{ category.name }}</a>
+        {% endfor %}
+
+      </div>
+      <div class="col col-md-9" id="base_target">
+
+        {% block stat_content %}
+
+          <p class="text-center fs_n_light border-bottom mb-3 pb-2 fw-bold">Общая статистика по предложению товаров по категориям</p>
+          <div style="height: 400px;" class="mx-auto d-flex justify-content-center mb-5">
+            <canvas id="base_count_items"></canvas>
+          </div>
+
+          <p class="text-center fs_n_light border-bottom mb-3 pb-2 fw-bold">Общая статистика по количеству заказов по дням</p>
+          <div style="height: 400px;" class="mx-auto d-flex justify-content-center mb-5">
+            <canvas id="base_count_orders"></canvas>
+          </div>
+
+        {% endblock stat_content %}
+
+      </div>
+</div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+{% block in_scripts %}
+    <script>
+
+      let chartData = JSON.parse('{{ chartData|safe }}');
+      let config = {
+        type: chartData.base_count_items.type,
+        data: {
+            labels: chartData.base_count_items.labels,
+            datasets: [{        
+                data: chartData.base_count_items.data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                ],
+                borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                ],
+            }]
+        }
+      };
+      let ctx = document.getElementById('base_count_items');
+      new Chart(ctx, config);
+
+      let config_1 = {
+        type: chartData.base_count_orders.type,
+        data: {
+            labels: chartData.base_count_orders.labels,
+            datasets: [{    
+                label: 'Заказы',  
+                data: chartData.base_count_orders.data,
+                
+            }]
+        },
+        options: {
+          scales: {
+            y: {
+                title:{
+                  display: true,
+                  text: 'Количество заказов',
+                },
+                ticks:{
+                  beginAtZero: true,
+                },
+            },
+            x: {
+              title:{
+                display: true,
+                text: 'Дата',
+              },
+              ticks:{
+                beginAtZero: true,
+              },
+          }
+        }
+      }
+      };
+      let ctx_1 = document.getElementById('base_count_orders');
+      new Chart(ctx_1, config_1);
+
+
+    </script>
+    {% endblock in_scripts %}
+{% endblock scripts %}
