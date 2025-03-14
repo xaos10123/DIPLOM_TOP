@@ -6,7 +6,7 @@ from goods.models import Product
 
 
 class Promo(models.Model):
-    promo_color = ColorField(default="#acd5f5fc") 
+    promo_color = ColorField(default="#acd5f5fc")
     promo_name = models.CharField(max_length=255, verbose_name="Название акции")
     promo_description = models.TextField(verbose_name="Описание акции")
     promo_image = models.ImageField(
@@ -24,6 +24,9 @@ class Promo(models.Model):
         verbose_name = "Акция"
         verbose_name_plural = "Акции"
 
+    def __str__(self):
+        return f"Акция: {self.promo_name} ({self.promo_discount}%)"
+
 
 @receiver(m2m_changed, sender=Promo.promo_products.through)
 def update_product_discount(sender, instance, action, pk_set, **kwargs):
@@ -37,14 +40,14 @@ def update_product_discount(sender, instance, action, pk_set, **kwargs):
 @receiver(pre_delete, sender=Promo)
 def update_discounts_on_promo_delete(sender, instance, **kwargs):
     products = instance.promo_products.all()
-    
+
     for product in products:
-        active_promos = product.promo_set.filter(
-            promo_status=True
-        ).exclude(id=instance.id)
-        
+        active_promos = product.promo_set.filter(promo_status=True).exclude(
+            id=instance.id
+        )
+
         if active_promos.exists():
-            max_discount = max(active_promos.values_list('promo_discount', flat=True))
+            max_discount = max(active_promos.values_list("promo_discount", flat=True))
             product.discaunt = int(max_discount)
         else:
             product.discaunt = 0

@@ -14,15 +14,20 @@
 
             {% if forloop.last %}
 
-                <div class="row pe-0 pt-3 w-100">
-                    <div class="col-6 fw-bold">Итого: {{ carts.total_price}} ₽</div>
-                    <div class="col-6 d-flex justify-content-end">
-                    <a
-                        hx-get="{% url 'orders:create_order' %}"
-                        hx-target="#basket_list"
-                        hx-trigger="click delay:100ms"
-                        class="btn btn-primary" type="button">Заказать <i class="fa-solid fa-arrow-right"></i></a>
-                    </div>
+                <div class="row pe-0 pt-3 w-100 d-flex justify-content-between align-items-center">
+                    {% if carts.total_price >= 600 %}
+                        <div class="col-6 fw-bold">Итого: {{ carts.total_price}} ₽</div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <a
+                                hx-get="{% url 'orders:create_order' %}"
+                                hx-target="#basket_list"
+                                hx-trigger="click delay:100ms"
+                                class="btn btn-primary" type="button">Заказать <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    {% else %}
+                    <div class="col-6 fw-bold mb-3">Итого: {{ carts.total_price}} ₽</div>
+                        <p class="btn btn-danger text-center">Минимальная сумма заказа: 600 р</p>
+                    {% endif %}
                 </div> 
                 
             {% endif %}

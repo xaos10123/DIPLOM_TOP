@@ -23,6 +23,10 @@
         </div>
         <div class="d-none d-md-flex col fs-3 align-items-center justify-content-end">
           <div class="row header_menu">
+            {% if user.is_staff %}
+              <a href="{% url "delivery:delivery_panel" %}"  class="col">Курьерам</a>
+              <a href={% url "admin:index" %}  class="col">Админ.часть</a>
+            {% endif %}
             <a href="{% url "goods:catalog" %}" class="col"
              hx-get="{% url "goods:catalog" %}"
              hx-target="#main_container"

@@ -32,7 +32,6 @@ urlpatterns = [
     path('orders/', include('orders.urls')),
     path('promo/', include('promotions.urls')),
     path('delivery_panel/', include('delivery_panel.urls')),
-    path('sales_stat/', include('sales_stat.urls')),
 ]
 
 if settings.DEBUG:

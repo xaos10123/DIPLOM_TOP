@@ -4,6 +4,11 @@
       <button type="button" class="btn-close fs-5" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body fs_n_light_italic fs-5 header_menu list-group list-group-flush">
+      {% if user.is_staff %}
+        <a href="{% url "delivery:delivery_panel" %}"  class="list-group-item">Курьерам</a>
+        <a href={% url "admin:index" %}  class="list-group-item">Админ.часть</a>
+        <a href={% url 'dashboards:dashboard' %} class="group">Статистика</a>
+      {% endif %}
 
       <a href="{% url "goods:catalog" %}" class="list-group-item">Каталог</a>
 

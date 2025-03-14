@@ -59,7 +59,6 @@ class FilteredProductsView(ListView):
         max_price = self.request.GET.get('max_price')
         oreding = self.request.GET.get('oreding')
         sale = self.request.GET.get('sale')
-        print(name, category_id, min_price, max_price, oreding, sale)
 
         products = Product.objects.all()
         
