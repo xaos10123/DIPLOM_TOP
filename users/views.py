@@ -135,7 +135,11 @@ def add_address(request):
 def del_address(request, adress_id):
     adress = Adress.objects.get(id=adress_id)
     adress.delete()
-    adress_new = Adress.objects.filter(user=request.user).first()
-    adress_new.is_active = True
-    adress_new.save()
+    if request.user.addresses:
+        active = request.user.addresses.filter(is_active=True)
+        if active:
+            return redirect("user:profile")
+        adress_new = request.user.addresses.filter(user=request.user).first()
+        adress_new.is_active = True
+        adress_new.save()
     return redirect("user:profile")

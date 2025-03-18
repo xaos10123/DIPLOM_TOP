@@ -30,7 +30,7 @@ class Order(models.Model):
         auto_now_add=True, verbose_name="Дата создания"
     )
     adress = models.ForeignKey(
-        to=Adress, on_delete=models.SET_DEFAULT, verbose_name="Адрес", default=None
+        to=Adress, on_delete=models.SET_NULL, verbose_name="Адрес", default='0', null=True, blank=True
     )
     is_paid = models.BooleanField(default=False, verbose_name="Статус оплаты")
     status = models.CharField(

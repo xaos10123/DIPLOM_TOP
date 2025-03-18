@@ -81,6 +81,7 @@
 <body>
     <header id="header">
         {% include "include_header.html" %}
+        {% include "users/include_modal_auth.html" %}
     </header>
 
     <div class="container" id="main_container" style="position: relative; min-height: 70vh!important;">
@@ -89,7 +90,7 @@
         {% block content %}
         {% endblock content %}
 
-        {% include "users/include_modal_auth.html" %}
+        
 
         <a href="#header" class="btn_to_top text-dark">
                 <i class="fa-solid fa-arrow-up"></i>
@@ -131,6 +132,13 @@
         document.body.addEventListener('updateCartList', () => {
             htmx.ajax('GET', '{% url "user:users_cart" %}', '#basket_list')
         });
+
+        document.body.addEventListener('htmx:beforeSwap', function(evt) {
+            if (evt.detail.target.id === 'modals-here' && !evt.detail.xhr.response) {
+              evt.preventDefault();
+              console.error('Получен пустой ответ для модального окна');
+            }
+          });
     </script>
 
     {% block scripts %}
