@@ -122,7 +122,7 @@ def get_revenue_stats():
 
 def get_stock_levels():
     return Product.objects.values("id", "name", "char", "quantity").order_by(
-        "-quantity"
+        "quantity"
     )
 
 
@@ -170,7 +170,7 @@ def dashboard(request):
 
     stock_result = [
         {
-            "product": f"{item['name']} {item['char']}",
+            "product": f"{item['name']} {item['char'][:15]}... ->",
             "quantity": item["quantity"],
             "id": item["id"],
         }

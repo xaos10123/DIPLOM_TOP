@@ -39,23 +39,20 @@
                         
                         <div class="accordion-body d-flex flex-column">
                             <p class="fs_n_semi_bold">Товары в заказе:</p>
-                            <div class="d-flex flex-wrap">
+                            <div class="d-flex" style="overflow-x: auto;">
                                 {% for item in order.items.all %}
 
-                                    <div class="col col-md-1 m-2 position-relative d-flex flex-column justify-content-start align-items-center">
-                                        <span
-                                            class="position-absolute z-3 top-0 start-100 translate-middle badge rounded-pill bg-info fs_n_semi_bold mb-0">
-                                            x {{ item.quantity }}
-                                        </span>
-
+                                    <div class="m-2 position-relative d-flex flex-column justify-content-center align-items-center">
                                         {% if item.product.image %}
                                             <img src="{{ item.product.image.url }}" class="item_img" alt="{{item.product.name}}_{{item.product.char}}">
                                         {% else  %}
                                             <img src={% static "main/img/no_img.png" %} class="item_img" alt="no_ing">
                                         {% endif %}
-
-                                        <p class="fs_n_semi_bold mb-0">{{ item.name|truncatechars:30 }}</p>
-                                        <button hx-get="{% url "cart:cart_add" item.product.slug%}" hx-swap="none" class="btn btn-outline-primary fs_n_thin mt-auto">Добавить</button>
+                                        <span
+                                            class="position-absolute z-2 top-0 start-100 translate-middle badge rounded-pill bg-info fs_n_semi_bold mb-0">
+                                            x {{ item.quantity }}
+                                        </span>
+                                        <button hx-get="{% url "cart:cart_add" item.product.slug%}" hx-swap="none" class="btn btn-outline-primary fs_n_thin mt-2">Добавить</button>
                                         
                                     </div>
 
