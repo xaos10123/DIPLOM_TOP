@@ -1,4 +1,4 @@
-
+{% load static %}
 
 <div class="row">
     <div class="col">
@@ -39,17 +39,23 @@
                         
                         <div class="accordion-body d-flex flex-column">
                             <p class="fs_n_semi_bold">Товары в заказе:</p>
-                            <div class="d-flex">
+                            <div class="d-flex flex-wrap">
                                 {% for item in order.items.all %}
 
-                                    <div class="m-2 position-relative d-flex flex-column justify-content-center align-items-center">
-                                        <img src="{{ item.product.image.url }}" class="baket_item_img" alt="{{ item.name }}" style="max-width:100px">
-                                        <p class="fs_n_semi_bold mb-0">{{ item.name }}</p>
+                                    <div class="col col-md-1 m-2 position-relative d-flex flex-column justify-content-start align-items-center">
                                         <span
-                                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info fs_n_semi_bold mb-0">
+                                            class="position-absolute z-3 top-0 start-100 translate-middle badge rounded-pill bg-info fs_n_semi_bold mb-0">
                                             x {{ item.quantity }}
                                         </span>
-                                        <button hx-get="{% url "cart:cart_add" item.product.slug%}" hx-swap="none" class="btn btn-outline-primary fs_n_thin">Добавить</button>
+
+                                        {% if item.product.image %}
+                                            <img src="{{ item.product.image.url }}" class="item_img" alt="{{item.product.name}}_{{item.product.char}}">
+                                        {% else  %}
+                                            <img src={% static "main/img/no_img.png" %} class="item_img" alt="no_ing">
+                                        {% endif %}
+
+                                        <p class="fs_n_semi_bold mb-0">{{ item.name|truncatechars:30 }}</p>
+                                        <button hx-get="{% url "cart:cart_add" item.product.slug%}" hx-swap="none" class="btn btn-outline-primary fs_n_thin mt-auto">Добавить</button>
                                         
                                     </div>
 

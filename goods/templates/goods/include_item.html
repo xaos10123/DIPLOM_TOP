@@ -2,7 +2,7 @@
 
 
 
-<button class="no_fill_button {% if item.quantity == 0 %} not_quantity {% endif %}  position-relative" {% if forloop.first %} hx-on="htmx:load:alert('sdfsdfsdfsdfsdf')"{% endif %} >
+<button class="no_fill_button {% if item.quantity == 0 %} not_quantity {% endif %} position-relative">
 
     <div class="col align-items-center item {% if not user.age_confirmed and item.category.pk == 2 %}blur_img{% endif %}">
 
@@ -31,8 +31,8 @@
                         <div class="item_name fs-4">
                             {{ item.name }}
                         </div>
-                        <div class="item_characteristic text-body-tertiary fs_n_thin_italic" style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                            {{ item.char }}
+                        <div class="item_characteristic text-body-tertiary fs_n_thin_italic" title="{{ item.char }}" style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                            {{ item.char|truncatechars:30 }}
                         </div>
                     </div>
 
@@ -67,6 +67,7 @@
     </div>
 
     {% if not user.age_confirmed and item.category.pk == 2 %}
+    
         <div class="position-absolute top-50 start-50 fs_n_black translate-middle text-light w-100" style="z-index: 10;">
             <p class="btn btn-danger fs-2">18+</p>
             <p class="btn btn-secondary p-0 w-75">Подтвердить возраст можно курьеру после первого заказа!</p>
