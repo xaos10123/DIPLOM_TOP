@@ -127,35 +127,42 @@
     </div>
 </div>
 
-<div class="col-12 col-md-6 card mx-2">
+<div class="col-12 col-md-6 card mx-2 position-relative">
     <div class="card-header text-center">
         <h4>Список товаров на складе</h4>
     </div>
-    <div class="card-body" style="height: 800px; overflow-y: auto;">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>Товар</th>
-                    <th>Остаток</th>
-                    <th>Действия</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in stock_items %}
-                <tr {% if item.quantity < 10 %}class="table-danger"{% endif %}>
-                    <td>{{ item.name }} {{ item.char }}</td>
-                    <td class="text-center">{{ item.quantity }}</td>
-                    <td class="text-center">
-                        <a href="{% url 'admin:goods_product_change' item.id %}" 
-                            class="btn btn-primary btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <form action={% url "goods:add_to_store"%} method="get">
+        <div class="card-body" style="height: 800px; overflow-y: auto;">
+                <button type="submit" class="btn btn-primary position-absolute top-0 right-0 p-2"><i class="fa-solid fa-file"></i> Создать поступление выбранных товаров <i class="fa-solid fa-file"></i></button>
+            <table class="table table-hover h-100">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Товар</th>
+                        <th>Остаток</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in stock_items %}
+                    <tr {% if item.quantity < 10 %}class="table-danger"{% endif %}>
+                        <td>
+                            <input type="checkbox" name="item_{{ item.id }}" id="" value="{{ item.id }}" {% if item.quantity < 10 %}checked{% endif %}>
+                        </td>
+                        <td>{{ item.name }} {{ item.char }}</td>
+                        <td class="text-center">{{ item.quantity }}</td>
+                        <td class="text-center">
+                            <a href="{% url 'admin:goods_product_change' item.id %}" 
+                                class="btn btn-primary btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </form>
 </div>
 
 
