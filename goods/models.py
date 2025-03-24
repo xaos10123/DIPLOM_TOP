@@ -56,3 +56,6 @@ class Product(models.Model):
             return int(self.price - self.price * self.discaunt / 100)
         else:
             return self.price
+    
+    def take_full_name(self):
+        return f"{self.name} ({self.char})"

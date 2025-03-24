@@ -26,8 +26,8 @@
                     {% for item in products %}
                         <tr>
                             <td>
-                                <select name="id_{{item.id}}" id="name_{{item.id}}" class="form-control">
-                                    <option value="{{ item.pk }}">{{ item.category.name|truncate_and_pad:10 }}| {{ item.name }}  ({{ item.char|truncatechars:30 }}) ---------->>> Остаток на складе: {{ item.quantity }}</option>
+                                <select name="id_{{item.id}}" id="name_{{item.id}}" class="form-control" style="font-family: 'Courier New', Courier, monospace;">
+                                    <option value="{{ item.pk }}" style="font-family: 'Courier New', Courier, monospace;">{{ item.category.name|truncate_and_pad:10 }}| {{ item.take_full_name|truncate_and_pad:60 }} | Остаток на складе: {{ item.quantity }}</option>
                                 </select>
                             </td>
                             <td>
@@ -39,7 +39,7 @@
             </tbody>
         </table>
         <div class="row d-flex justify-content-center mb-4">
-            <button type="button" class="btn btn-success" id="add">Добавить ещё товар</button>
+            <button type="button" class="btn btn-success" id="add">Добавить товар</button>
         </div>
         
         <input type="submit" value="Провести" class="btn btn-primary w-100">
@@ -72,7 +72,7 @@
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
                     <td>
-                        <select name="id_${rowCounter}" id="name_${rowCounter}" class="form-control">
+                        <select name="id_${rowCounter}" id="name_${rowCounter}" class="form-control" style="font-family: 'Courier New', Courier, monospace;">
                         ${await getProductList()}
                         </select>
                     </td>
