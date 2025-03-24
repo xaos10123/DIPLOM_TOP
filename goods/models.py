@@ -40,7 +40,6 @@ class Product(models.Model):
     order_amount = models.PositiveIntegerField(
         default=0, verbose_name="Количество заказов"
     )
-    # views = models.PositiveIntegerField(default=0, verbose_name='Просмотров')
 
     class Meta:
         verbose_name = "Товар"
