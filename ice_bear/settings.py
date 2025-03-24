@@ -67,6 +67,7 @@ JAZZMIN_SETTINGS = {
      "topmenu_links": [
         {"name": "Главная страница",  "url": "admin:index"},
         {"name": "Статистика", "url": "dashboards:dashboard", "icon": "fa-regular fa-chart-bar"},
+        {"name": "Поступление на склад", "url": "goods:add_to_store", "icon": "fa-regular fa-chart-bar"},
         {"app": "goods"},
         {"app": "promotions"},
     ],

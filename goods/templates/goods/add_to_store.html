@@ -1,0 +1,91 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+{% load good_tag %}
+
+{% block extrastyle %}{{ block.super }}{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}{{ block.super }}dashboard{% endblock %}
+
+{% block breadcrumbs %}<h1 class="text-center mb-3 fs-3">Поступление товаров</h1>{% endblock %}
+
+{% block content %}
+<div class="container">
+    <form action="" method="post">
+        {% csrf_token %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="col-11 text-center">Товар</th>
+                    <th class="col-1 text-center">Количество</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if products %}
+                    {% for item in products %}
+                        <tr>
+                            <td>
+                                <select name="id_{{item.id}}" id="name_{{item.id}}" class="form-control">
+                                    <option value="{{ item.pk }}">{{ item.category.name|truncate_and_pad:10 }}| {{ item.name }}  ({{ item.char|truncatechars:30 }}) ---------->>> Остаток на складе: {{ item.quantity }}</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="number" name="count_{{item.id}}" id="count_{{item.id}}" value="" required class="form-control">
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </tbody>
+        </table>
+        <div class="row d-flex justify-content-center mb-4">
+            <button type="button" class="btn btn-success" id="add">Добавить ещё товар</button>
+        </div>
+        
+        <input type="submit" value="Провести" class="btn btn-primary w-100">
+    </form>
+</div>
+
+
+<script>
+    const btn = document.getElementById('add');
+    const tbody = document.querySelector('tbody');
+    let rowCounter = 1;
+
+    async function getProductList() {
+        try {
+            const response = await fetch('{% url "goods:prlst" %}');
+            if (!response.ok) {
+                throw new Error('Ошибка при получении списка товаров');
+            }
+            const html = await response.text();
+            return html;
+        } catch (error) {
+            console.error('Ошибка:', error);
+            return null;
+        }
+    }
+
+    btn.addEventListener('click', async function() {
+        rowCounter++;
+        
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+                    <td>
+                        <select name="id_${rowCounter}" id="name_${rowCounter}" class="form-control">
+                        ${await getProductList()}
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" name="count_${rowCounter}" id="count_${rowCounter}" value="" required class="form-control">
+                    </td>
+        `;
+        
+        
+        
+        tbody.appendChild(newRow);
+    });
+
+
+</script>
+{% endblock %}

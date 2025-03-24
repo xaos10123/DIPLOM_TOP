@@ -1,0 +1,4 @@
+{% load good_tag %}
+{% for item in products %}
+    <option value="{{ item.pk }}">{{ item.category.name|truncate_and_pad:10 }}| {{ item.name }}  ({{ item.char|truncatechars:30 }}) ---------->>> Остаток на складе: {{ item.quantity }}</option>
+{% endfor %}
