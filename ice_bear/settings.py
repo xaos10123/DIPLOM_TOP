@@ -24,13 +24,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG') == 'True'
+DEBUG = os.getenv("DEBUG") == "True"
 
 ALLOWED_HOSTS = []
-
 
 
 INSTALLED_APPS = [
@@ -61,20 +60,28 @@ JAZZMIN_SETTINGS = {
     "site_brand": "ICE BEAR MARKET",
     "welcome_sign": "Добро пожаловать в админ-панель!",
     "copyright": "ICE BEAR MARKET",
-    "search_model":[ "goods.Product"],
+    "search_model": ["goods.Product"],
     "site_logo": "img/logo_bear.svg",
     "user_avatar": None,
-     "topmenu_links": [
-        {"name": "Главная страница",  "url": "admin:index"},
-        {"name": "Статистика", "url": "dashboards:dashboard", "icon": "fa-regular fa-chart-bar"},
-        {"name": "Поступление на склад", "url": "goods:add_to_store", "icon": "fa-regular fa-chart-bar"},
+    "topmenu_links": [
+        {"name": "Вернуться в магазин", "url": "main:index"},
+        {"name": "Главная страница", "url": "admin:index"},
+        {"name": "Статистика", "url": "dashboards:dashboard"},
+        {"name": "Поступление на склад", "url": "goods:add_to_store"},
         {"app": "goods"},
         {"app": "promotions"},
     ],
     "hide_apps": ["django_q"],
     "hide_models": ["orders.OrderItem", "users.Adress"],
     "navigation_expanded": False,
-    "order_with_respect_to": ["auth", "goods", "goods.Product", "goods.Categories", "promotions", "carts"],
+    "order_with_respect_to": [
+        "auth",
+        "goods",
+        "goods.Product",
+        "goods.Categories",
+        "promotions",
+        "carts",
+    ],
     "icons": {
         "goods": "fa-solid fa-boxes-stacked",
         "goods.Product": "fa-brands fa-product-hunt",
@@ -89,11 +96,13 @@ JAZZMIN_SETTINGS = {
         "users.User": "fa-solid fa-user",
     },
     "custom_links": {
-        None: [{
-            "name": "Статистика", 
-            "url": "dashboards:dashboard", 
-            "icon": "fa-regular fa-chart-bar",
-        }]
+        None: [
+            {
+                "name": "Статистика",
+                "url": "dashboards:dashboard",
+                "icon": "fa-regular fa-chart-bar",
+            }
+        ]
     },
 }
 
@@ -124,8 +133,8 @@ JAZZMIN_UI_TWEAKS = {
         "info": "btn-primary",
         "warning": "btn-warning",
         "danger": "btn-danger",
-        "success": "btn-success"
-    }
+        "success": "btn-success",
+    },
 }
 
 
@@ -199,7 +208,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = os.getenv('LANGUAGE_CODE')
+LANGUAGE_CODE = os.getenv("LANGUAGE_CODE")
 
 TIME_ZONE = "UTC"
 
@@ -220,7 +229,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),  
+    os.path.join(BASE_DIR, "static"),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
@@ -252,4 +261,11 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer",
     },
+}
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": os.path.join(BASE_DIR, 'django_cache'),
+    }
 }

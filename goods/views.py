@@ -1,17 +1,25 @@
 from django.db.models import Q, Max, Min
 from django.shortcuts import redirect, render
+from django.core.cache import cache
 from django.views.generic import ListView, TemplateView
+from django.views.decorators.cache import cache_page
 import goods
 from main.views import CustomHtmxMixin
 from .models import Product, Categories
 
+def get_categories():
+    categories = cache.get('all_categories')
+    if not categories:
+        categories = Categories.objects.all()
+        cache.set('all_categories', categories, 60 * 30)
+    return categories
 
 class CatalogView(CustomHtmxMixin, TemplateView):
     model = Product
     template_name = "goods/catalog.html"
 
     def get_context_data(self, **kwargs):
-        kwargs["categories"] = Categories.objects.all()
+        kwargs["categories"] = get_categories()
         kwargs["all_items_count"] = Product.objects.count()
         price_stats = Product.objects.aggregate(
             max_price=Max("price"), min_price=Min("price")
@@ -30,7 +38,7 @@ class CatalogCategoryView(CustomHtmxMixin, ListView):
         return Product.objects.filter(category__slug=category_slug)
 
     def get_context_data(self, **kwargs):
-        kwargs["categories"] = Categories.objects.all()
+        kwargs["categories"] = get_categories()
         price_stats = Product.objects.aggregate(
             max_price=Max("price"), min_price=Min("price")
         )
@@ -112,7 +120,7 @@ def product_add(request):
         return render(request, "goods/add_to_store.html", {"products": products})
         
 
-
+@cache_page(60 * 15)
 def get_product_list(request):
     products = Product.objects.all().order_by("category__name", "name", "char")
     return render(request, "goods/product_list.html", {"products": products})

@@ -1,7 +1,7 @@
 {% load static %}
+{% load cache %}
 
-
-
+{% cache 500 sidebar item %}
 <button class="no_fill_button {% if item.quantity == 0 %} not_quantity {% endif %} position-relative">
 
     <div class="col align-items-center item {% if not user.age_confirmed and item.category.pk == 2 %}blur_img{% endif %}">
@@ -75,4 +75,5 @@
         
     {% endif %}
 </button>
+{% endcache %}
 

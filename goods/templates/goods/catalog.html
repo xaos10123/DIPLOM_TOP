@@ -1,11 +1,14 @@
  {% load static %}
+ {% load cache %}
  <div class="row mt-3">
       <div class="d-none d-lg-block col-lg-3">
         <div class="filter_block p-2">
 
           <div class="filter_block_content">
             
-            {% include "goods/form_filters.html" %}
+                {% cache 300 form_filters %}
+                    {% include "goods/form_filters.html" %}
+                {% endcache %}
 
             
           </div>
@@ -19,7 +22,9 @@
 
       <div class="collapse mb-3" id="collapseExample">
         <div class="filter_block p-2">
-          {% include "goods/form_filters.html" %}
+          {% cache 300 form_filters %}
+            {% include "goods/form_filters.html" %}
+          {% endcache %}
         </div>
       </div>
 
