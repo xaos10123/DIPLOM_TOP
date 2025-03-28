@@ -1,7 +1,5 @@
 {% load static %}
-{% load cache %}
 
-{% cache 500 sidebar item %}
 <button class="no_fill_button {% if item.quantity == 0 %} not_quantity {% endif %} position-relative">
 
     <div class="col align-items-center item {% if not user.age_confirmed and item.category.pk == 2 %}blur_img{% endif %}">
@@ -32,7 +30,7 @@
                             {{ item.name }}
                         </div>
                         <div class="item_characteristic text-body-tertiary fs_n_thin_italic" title="{{ item.char }}" style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                            {{ item.char|truncatechars:30 }}
+                            {{ item.char|truncatechars:15 }}
                         </div>
                     </div>
 
@@ -43,16 +41,15 @@
                             <div class="float-start fs-6 fs_n_thin_italic">Цена:</div>
 
                             <div class="item_price fs_n_black fs-4 p-0" style="{% if item.discaunt != 0 %}color:#dc3545;{% endif %}">{{ item.sell_price }}₽</div>
-                            
-                            {% if item.quantity != 0 and user.age_confirmed %}  
-                                <i class="fa-solid fa-plus fs-3 text-secondary" hx-get="{% url "cart:cart_add" item.slug%}" hx-swap="none"
-                                ></i>
-                            {% elif item.quantity != 0 and not item.category.pk == 2 %}
-                                <i class="fa-solid fa-plus fs-3 text-secondary" hx-get="{% url "cart:cart_add" item.slug%}" hx-swap="none"
-                                ></i>
-
-                            
-                            {% endif %}
+                                {% if user.is_authenticated %}
+                                    {% if item.quantity != 0 and user.age_confirmed %}  
+                                        <i class="fa-solid fa-plus fs-3 text-secondary" hx-get="{% url "cart:cart_add" item.slug%}" hx-swap="none"
+                                        ></i>
+                                    {% elif item.quantity != 0 and not item.category.pk == 2 %}
+                                        <i class="fa-solid fa-plus fs-3 text-secondary" hx-get="{% url "cart:cart_add" item.slug%}" hx-swap="none"
+                                        ></i>
+                                    {% endif %}
+                                {% endif %}
 
                              
 
@@ -75,5 +72,3 @@
         
     {% endif %}
 </button>
-{% endcache %}
-

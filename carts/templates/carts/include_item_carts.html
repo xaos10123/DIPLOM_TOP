@@ -8,7 +8,7 @@
 
           <div class="col-3 position-relative d-flex align-items-center justify-content-start">
 
-            {% if item.image %}
+                    {% if item.image %}
                         <img src="{{ item.image.url }}" class="item_img" alt="{{item.name}}_{{item.char}}">
                     {% else  %}
                         <img src={% static "main/img/no_img.png" %} class="item_img" alt="no_ing">
