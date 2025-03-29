@@ -1,62 +1,60 @@
  {% load static %}
+
  <div class="list-group-item">
-        <div class="row">
-            <div class="col-1 d-flex align-items-center justify-content-start">
-                <button type="button" class="btn" 
-                    hx-get="{% url "cart:cart_remove" cart.id %}" hx-swap="none"><i class="fa-solid fa-trash-can text-danger"></i></button>
-            </div>
+    <div class="row">
+      <div class="col-1 d-flex align-items-center justify-content-start">
+          <button type="button" class="btn" 
+              hx-get="{% url "cart:cart_remove" cart.id %}" hx-swap="none">
+              <i class="fa-solid fa-trash-can text-danger"></i>
+          </button>
+      </div>
+      <div class="col-3 position-relative d-flex align-items-center justify-content-start">
 
-          <div class="col-3 position-relative d-flex align-items-center justify-content-start">
+        {% if item.image %}
+            <img src="{{ item.image.url }}" class="item_img" alt="{{item.name}}_{{item.char}}">
+        {% else  %}
+            <img src={% static "main/img/no_img.png" %} class="item_img" alt="no_ing">
+        {% endif %}
 
-                    {% if item.image %}
-                        <img src="{{ item.image.url }}" class="item_img" alt="{{item.name}}_{{item.char}}">
-                    {% else  %}
-                        <img src={% static "main/img/no_img.png" %} class="item_img" alt="no_ing">
-                    {% endif %}
-            {% if item.discaunt != 0 %}
-                <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger fs_n_thin"
-                  style="font-size: 0.7rem; z-index: 100;">
-                  -{{ item.discaunt }}%
-                </span>
-            {% endif %}
+        {% if item.discaunt != 0 %}
+              <span class="position-absolute top-0 start-50 translate-middle badge rounded-pill bg-danger fs_n_thin"
+                style="font-size: 0.7rem; z-index: 100;">
+                -{{ item.discaunt }}%
+              </span>
+        {% endif %}
+      </div>
+
+      <div class="col-8 position-relative">
+
+        <div class="row d-flex flex-column">
+          <div class="col">{{ item.name }}</div>
+          <div class="col text-body-tertiary fs_n_thin_italic fs-6">{{ item.char }}</div>
+        </div>
+
+        <div class="row mt-sm-2">
+
+          <div class="col-2 d-flex align-items-center justify-content-start">
+            {% if cart.quantity == 1 %}
+            <button class="btn p-0 px-1 w-100" hx-get="{% url "cart:cart_remove" cart.id %}">
+              <i class="fa-solid fa-trash-can text-danger"></i>
+            </button> 
+            {% else %}
+            <button class="btn p-0 px-1 w-100" hx-get="{% url "cart:cart_change" cart.id 'desc' %}"  hx-target="#quantity_{{ cart.id }}" >
+              <i class="fa-solid fa-minus"></i>
+            </button> 
+            {% endif %}                
+          </div>              
+          <div class="col-1 text-center d-flex align-items-center" id="quantity_{{ cart.id }}">
+            {{ cart.quantity }}
           </div>
-
-          <div class="col-8 position-relative">
-
-            <div class="row d-flex flex-column">
-              <div class="col">{{ item.name }}</div>
-              <div class="col text-body-tertiary fs_n_thin_italic fs-6">{{ item.char }}</div>
-            </div>
-
-            <div class="row mt-sm-2">
-              <div class="col-2 d-flex align-items-center justify-content-start">
-                {% if cart.quantity == 1 %}
-                <button class="btn p-0 px-1 w-100" hx-get="{% url "cart:cart_remove" cart.id %}"><i class="fa-solid fa-trash-can text-danger"></i></button> 
-                {% else %}
-                <button class="btn p-0 px-1 w-100" hx-get="{% url "cart:cart_change" cart.id 'desc' %}"  hx-target="#quantity_{{ cart.id }}" ><i class="fa-solid fa-minus"></i> </button> 
-                {% endif %}
-                
-              </div>
-              <div class="col-1 text-center d-flex align-items-center" id="quantity_{{ cart.id }}">{{ cart.quantity }}</div>
-              <div class="col-2 d-flex align-items-center justify-content-start">
-                <button class="btn p-0 px-1 w-100" hx-get="{% url "cart:cart_change" cart.id 'inc' %}" hx-target="#quantity_{{ cart.id }}" >
-                  <i class="fa-solid fa-plus"></i>
-                </button>
-              </div>
-              <div class="col-3 d-flex align-items-center justify-content-center text-center fs-6 p-0 text-body-tertiary ">x {{ item.sell_price }}</div>
-              <div class="col-3 d-flex align-items-center justify-content-center text-center fs-5 p-0">{{ cart.products_price }} ₽</div>
-            </div>
-
-                {% comment %} <div class="row flex-column">
-                    <div class="col">{{ item.name }}</div>
-                    <div class="col text-body-tertiary fs_n_thin_italic fs-6">{{ item.char }}</div>
-                </div>
-                <span
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-info fs_n_semi_bold">
-                    {{ cart.quantity }} x {{ item.sell_price }}
-                </span> {% endcomment %}
+          <div class="col-2 d-flex align-items-center justify-content-start">
+            <button class="btn p-0 px-1 w-100" hx-get="{% url "cart:cart_change" cart.id 'inc' %}" hx-target="#quantity_{{ cart.id }}" >
+              <i class="fa-solid fa-plus"></i>
+            </button>
           </div>
-
-          {% comment %} <div class="col-2 fs-6 p-0 d-flex align-items-center fs_n_semi_bold">{{ cart.products_price }} ₽</div> {% endcomment %}
+          <div class="col-3 d-flex align-items-center justify-content-center text-center fs-6 p-0 text-body-tertiary ">x {{ item.sell_price }}</div>
+          <div class="col-3 d-flex align-items-center justify-content-center text-center fs-5 p-0">{{ cart.products_price }} ₽</div>
         </div>
       </div>
+    </div>
+</div>
